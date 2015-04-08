@@ -23,8 +23,75 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-RSpec.describe 'proxy.example.com' do
-  subjectj
+RSpec.describe 'Intfrastructure A' do
+  describe 'proxy1' do
+    subject { 'proxy1.example.com' }
+
+    context 'request resource via http' do
+      let(:resource) { Resource.new('http://example.com') }
+
+      context 'when url is readable' do
+        it { expect(proxy).to forward_url(resource) }
+      end
+
+      context 'when website needs to be browsed' do
+        before(:each) { download(resource) }
+        it { expect(resource).to have_content('Example') }
+      end
+
+      context 'when proxy authentication is needed' do
+        let(:user) { ProxyUser.new(name: 'user1') }
+        before(:each) { download(resource) }
+
+        it { expect(resource).to have_content('Example') }
+      end
+
+      context 'when upload uses post http method' do
+        let(:data) { 'data' }
+        before(:each) { upload(resource, data) }
+
+        it { expect(resource).to have_content('Example') }
+      end
+
+      context 'when upload uses put http method' do
+        let(:data) { 'data' }
+        before(:each) { upload(resource, data, method: 'put') }
+
+        it { expect(resource).to have_content('Example') }
+      end
+    end
+
+    context 'request resource via https' do
+      let(:resource) { Resource.new('https://example.com') }
+    end
+
+    context 'request resource via ftp' do
+      let(:resource) { Resource.new('ftp://example.com/file.txt') }
+
+      context 'when website needs to be browsed' do
+        before(:each) { download(resource) }
+        it { expect(resource).to have_content('Example') }
+      end
+
+      context 'when url is readable' do
+        it { expect(proxy).to forward_url(resource) }
+      end
+
+      context 'when authentication is needed' do
+        let(:user) { ProxyUser.new(name: 'user1') }
+        before(:each) { download(resource) }
+
+        it { expect(resource).to have_content('Example') }
+      end
+
+      context 'when upload' do
+        let(:data) { File.open('file.txt') }
+        before(:each) { upload(resource, data) }
+
+        it { expect(resource).to have_content('Example') }
+      end
+    end
+  end
 end
 ```
 
