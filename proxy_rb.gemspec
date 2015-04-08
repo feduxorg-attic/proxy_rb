@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Max Meyer']
   spec.email         = ['dev@fedux.org']
 
-  spec.summary       = %q{This gem makes testing your proxy easy.}
+  spec.summary       = 'This gem makes testing your proxy easy.'
   spec.homepage      = 'https://github.com/fedux-org/proxy_rb'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

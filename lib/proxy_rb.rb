@@ -1,5 +1,6 @@
-require "proxy_rb/version"
+require 'proxy_rb/version'
+require 'proxy_rb/main'
 
+# Main module
 module ProxyRb
-  # Your code goes here...
 end
