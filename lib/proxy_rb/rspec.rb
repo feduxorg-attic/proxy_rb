@@ -18,4 +18,6 @@ end
 
 RSpec.configure do |config|
   config.include ProxyRb::Rspec::Helpers::HttpProxy, type: :http_proxy
+  config.include Capybara::DSL, type: :http_proxy
+  config.include Capybara::RSpecMatchers, type: :http_proxy
 end

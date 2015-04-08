@@ -5,8 +5,8 @@ PATH
       activesupport
       addressable
       capybara
+      excon
       poltergeist
-      uglifier
 
 GEM
   remote: https://rubygems.org/
@@ -70,7 +70,7 @@ GEM
     domain_name (0.5.23)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
-    execjs (2.5.0)
+    excon (0.45.1)
     fedux_org-stdlib (0.7.33)
       activesupport
     ffi (1.9.8)
@@ -200,9 +200,6 @@ GEM
       json
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.1)
-      execjs (>= 0.3.0)
-      json (>= 1.8.0)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.6)
