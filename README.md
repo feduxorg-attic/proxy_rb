@@ -22,7 +22,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+RSpec.describe 'proxy.example.com' do
+  subjectj
+end
+```
 
 ## Development
 
