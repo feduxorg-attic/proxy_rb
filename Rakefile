@@ -14,7 +14,7 @@ task :test do
   Rake::Task['test:before'].execute
 
   begin
-    #%w(test:rubocop test:rspec test:cucumber test:after).each { |t| Rake::Task[t].execute }
+    # %w(test:rubocop test:rspec test:cucumber test:after).each { |t| Rake::Task[t].execute }
     %w(test:rubocop test:rspec test:after).each { |t| Rake::Task[t].execute }
   ensure
     Rake::Task['test:after'].execute
