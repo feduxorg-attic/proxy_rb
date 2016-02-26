@@ -18,7 +18,7 @@ module ProxyRb
       %w(pry byebug).each { |l| require l }
     end
 
-    def require_file_matching_pattern(pattern)
+    def require_files_matching_pattern(pattern)
       root = File.expand_path('../', __FILE__)
       path = File.join(root, pattern)
       Dir.glob(path).each { |f| require_relative f }
