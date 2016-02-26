@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+which ruby 2>/dev/null >&2 || {
+  echo 'Bitte "ruby" installieren'
+  exit 2
+}
+
+gem install bundler && bundle install

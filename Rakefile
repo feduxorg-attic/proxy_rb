@@ -3,24 +3,21 @@
 # require 'bundler'
 # Bundler.require :default, :test, :development
 
-require 'filegen'
-require 'fedux_org_stdlib/rake_tasks'
-
 require 'coveralls/rake/task'
 Coveralls::RakeTask.new
 
 task default: :test
 
 desc 'Run test suite'
-task :test do
-  Rake::Task['test:before'].execute
+task test: %w(test:cucumber) do
+#  Rake::Task['test:before'].execute
 
-  begin
-    # %w(test:rubocop test:rspec test:cucumber test:after).each { |t| Rake::Task[t].execute }
-    %w(test:rubocop test:rspec test:after).each { |t| Rake::Task[t].execute }
-  ensure
-    Rake::Task['test:after'].execute
-  end
+#  begin
+#    # %w(test:rubocop test:rspec test:cucumber test:after).each { |t| Rake::Task[t].execute }
+#    %w(test:rubocop test:rspec test:after).each { |t| Rake::Task[t].execute }
+#  ensure
+#    Rake::Task['test:after'].execute
+#  end
 end
 
 namespace :test do

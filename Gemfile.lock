@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     proxy_rb (0.1.0)
-      activesupport
       addressable
       capybara
       excon
