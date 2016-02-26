@@ -63,32 +63,15 @@ module ProxyRb
             raise ProxyRb::UrlTimeoutError, "Failed to fetch #{resource.to_uri}: Timeout occured."
           end
         end
-        alias download visit 
+        alias download visit
+        alias response page
 
-        private
-
-        def _clear_environment
-          %w(
-            http_proxy
-            https_proxy
-            HTTP_PROXY
-            HTTPS_PROXY
-          ).each { |v| ENV.delete v }
+        def request
+          Request.new(page)
         end
 
-        def _register_capybara_driver_for_proxy
-          options = {
-            phantomjs_options: proxy.to_phantom_js,
-            js_errors: false,
-            phantomjs_logger: $stderr
-          }
-
-          ::Capybara.register_driver proxy.to_sym do |app|
-            ::Capybara::Poltergeist::Driver.new(app, options)
-          end
-
-          ::Capybara.run_server = false
-          ::Capybara.current_driver = proxy.to_sym
+        def response
+          Response.new(page)
         end
       end
     end
