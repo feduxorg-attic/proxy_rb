@@ -13,7 +13,6 @@ group :debug do
 end
 
 group :development, :test do
-  gem 'activesupport', '~> 4.2.0', require: false
   gem 'aruba', require: false
   gem 'awesome_print', require: 'ap'
   gem 'bundler', '~> 1.3', require: false
@@ -21,7 +20,6 @@ group :development, :test do
   gem 'coveralls', require: false
   gem 'cucumber', require: false
   gem 'erubis'
-  gem 'fedux_org-stdlib', '~>0.7.25', require: false
   gem 'filegen'
   gem 'foreman', require: false
   gem 'fuubar', require: false
@@ -31,7 +29,6 @@ group :development, :test do
   gem 'license_finder'
   gem 'rack'
   gem 'rake', require: false
-  gem 'redcarpet', require: false
   gem 'rubocop', require: false
   gem 'simplecov', require: false
   gem 'sinatra', require: 'sinatra/base'

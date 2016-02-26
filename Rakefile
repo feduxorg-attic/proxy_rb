@@ -9,6 +9,8 @@ require 'fedux_org_stdlib/rake_tasks'
 require 'coveralls/rake/task'
 Coveralls::RakeTask.new
 
+task default: :test
+
 desc 'Run test suite'
 task :test do
   Rake::Task['test:before'].execute
