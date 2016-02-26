@@ -1,3 +1,5 @@
+require 'excon'
+
 module ProxyRb
   class HttpDownloader
     private

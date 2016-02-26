@@ -1,13 +1,12 @@
 require 'rspec'
-require 'capybara/poltergeist'
 require 'capybara/rspec'
 
-require 'proxy_rb/rspec'
+require 'proxy_rb/main'
 
-ProxyRb.require_file_matching_pattern('rspec/helpers/*.rb')
-ProxyRb.require_file_matching_pattern('rspec/matchers/*.rb')
-ProxyRb.require_file_matching_pattern('rspec/shared_examples/*.rb')
-ProxyRb.require_file_matching_pattern('rspec/shared_contexts/*.rb')
+ProxyRb.require_files_matching_pattern('rspec/helpers/*.rb')
+ProxyRb.require_files_matching_pattern('rspec/matchers/*.rb')
+ProxyRb.require_files_matching_pattern('rspec/shared_examples/*.rb')
+ProxyRb.require_files_matching_pattern('rspec/shared_contexts/*.rb')
 
 # Main Module
 module ProxyRb
@@ -18,6 +17,6 @@ end
 
 RSpec.configure do |config|
   config.include ProxyRb::Rspec::Helpers::HttpProxy, type: :http_proxy
-  config.include Capybara::DSL, type: :http_proxy
+  # config.include Capybara::DSL, type: :http_proxy
   config.include Capybara::RSpecMatchers, type: :http_proxy
 end

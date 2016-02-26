@@ -1,3 +1,5 @@
+require 'addressable/uri'
+
 module ProxyRb
   class Resource
     attr_accessor :content

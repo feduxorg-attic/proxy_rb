@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'addressable'
   spec.add_runtime_dependency 'excon'
-  spec.add_runtime_dependency 'activesupport'
+#  spec.add_runtime_dependency 'phantomjs'
 
   spec.required_ruby_version = '~> 2.0'
 end
