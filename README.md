@@ -23,7 +23,9 @@ Or install it yourself as:
 ### Rspec-Integration
 
 ```ruby
-RSpec.describe 'Intfrastructure A' do
+require 'proxy_rb/rspec'
+
+RSpec.describe 'Infrastructure A' do
   describe 'proxy1' do
     subject { 'proxy1.example.com' }
 
