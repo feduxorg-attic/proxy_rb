@@ -12,10 +12,7 @@ module ProxyRb
     public
 
     def initialize(uri)
-      @uri = URI(uri)
-      @credentials = Credentials.new(@uri.user, @uri.password)
-      @uri.user     = nil
-      @uri.password = nil
+      @uri         = URI(uri)
 
       if hostname?(uri)
         splitted_uri = uri.split(/:/)
@@ -25,6 +22,8 @@ module ProxyRb
         @uri.host     = splitted_uri.first
         @uri.port     = splitted_uri.last unless splitted_uri.first == splitted_uri.last
       end
+
+      @credentials = Credentials.new(@uri.user, @uri.password)
     end
 
     def to_uri

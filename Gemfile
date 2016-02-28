@@ -13,6 +13,12 @@ group :debug do
 end
 
 group :development, :test do
+  # Password store
+  gem 'vault'
+
+  # Set env during development/test
+  gem 'dotenv'
+
   gem 'aruba', require: false
   gem 'awesome_print', require: 'ap'
   gem 'bundler', '~> 1.3', require: false

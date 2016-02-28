@@ -11,3 +11,7 @@ require 'byebug'
 # Bundler.require :default, :test, :development
 
 ENV['TEST'] = 'true'
+
+# Loading support files
+Dir.glob(::File.expand_path('../../../test/support/*.rb', __FILE__)).each { |f| require_relative f }
+Dir.glob(::File.expand_path('../../../test/support/**/*.rb', __FILE__)).each { |f| require_relative f }

@@ -1,8 +1,10 @@
+sudo: false
 env:
   - CI=1
 language: ruby
 bundler_args: --without development debug profile
 rvm:
   - 2.1.5
-  - 2.2.1
+  - 2.2.3
+  - 2.3.0
 script: script/ci

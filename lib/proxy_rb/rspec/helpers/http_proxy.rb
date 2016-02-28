@@ -34,8 +34,6 @@ module ProxyRb
             ::Capybara.register_driver proxy.to_sym do |app|
               ::Capybara::Poltergeist::Driver.new(app, options)
             end
-            require 'pry'
-            binding.pry
 
             ::Capybara.run_server = false
             ::Capybara.current_driver = proxy.to_sym

@@ -1,13 +1,16 @@
 # Main
 module ProxyRb
   @debug_mode = false
+  @logger     = Logger.new($stderr)
 
   class << self
-    private
+    protected
 
     attr_accessor :debug_mode
 
     public
+
+    attr_reader :logger
 
     def debug_mode_enabled?
       debug_mode == true
