@@ -11,7 +11,7 @@ module ProxyRb
     end
 
     def successful?
-      page.status_code.to_s.start_with? '2'
+      page.status_code.to_s.start_with?('2')  || page.status_code.to_s.start_with?('3')
     end
 
     # def forbidden?

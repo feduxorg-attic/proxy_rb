@@ -48,7 +48,7 @@ GEM
       smart_colored
       xml-simple
     contracts (0.13.0)
-    coveralls (0.8.11)
+    coveralls (0.8.12)
       json (~> 1.8)
       simplecov (~> 0.11.0)
       term-ansicolor (~> 1.3)

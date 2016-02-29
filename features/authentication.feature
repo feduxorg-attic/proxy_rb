@@ -8,9 +8,11 @@ Feature: Authenticate agains proxy
     Given I use a fixture named "proxy-config"
     And I look for executables in "bin" within the current directory
     And I use a proxy requiring authentication
+    And I run `http_proxy` in background
+    And I run `http_server` in background
 
   Scenario: Set authentication via subject
-    And a spec file named "test_spec.rb" with:
+    Given a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
 
@@ -24,8 +26,6 @@ Feature: Authenticate agains proxy
       end
     end
     """
-    And I run `http_proxy` in background
-    And I run `http_server` in background
     When I successfully run `rspec`
     Then the specs should all pass
 
@@ -47,13 +47,13 @@ Feature: Authenticate agains proxy
       end
     end
     """
-    And I run `http_proxy` in background
-    And I run `http_server` in background
     When I successfully run `rspec`
     Then the specs should all pass
 
   Scenario: Use password from HashiCorp Vault
-    Given I use a proxy requiring authentication
+    Given I use a local vault server with the following data at "/secret/users":
+       | user  | password |
+       | user1 | *Test123 |
     And a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
@@ -74,7 +74,5 @@ Feature: Authenticate agains proxy
       end
     end
     """
-    And I run `http_proxy` in background
-    And I run `http_server` in background
     When I successfully run `rspec`
     Then the specs should all pass

@@ -1,4 +1,4 @@
-require 'addressable/uri'
+require 'uri'
 
 module ProxyRb
   class Resource
@@ -6,16 +6,16 @@ module ProxyRb
 
     private
 
-    attr_reader :uri
+    attr_reader :url
 
     public
 
-    def initialize(uri)
-      @uri = Addressable::URI.parse(uri)
+    def initialize(url)
+      @url = URI(url)
     end
 
-    def to_uri
-      uri.to_s
+    def to_url
+      url.to_s
     end
   end
 end

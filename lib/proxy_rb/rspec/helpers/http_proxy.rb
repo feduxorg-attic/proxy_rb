@@ -46,7 +46,7 @@ module ProxyRb
         include ::Capybara::DSL
 
         def proxy
-          ProxyRb::HttpProxy.new(subject)
+          ProxyRb::HttpProxy.new(ProxyUrlParser.new(subject))
         end
 
         def visit(url)
@@ -56,9 +56,9 @@ module ProxyRb
           NonIncludes.register_capybara_driver_for_proxy(proxy)
 
           begin
-            super(resource.to_uri)
+            super(resource.to_url)
           rescue ::Capybara::Poltergeist::TimeoutError
-            raise ProxyRb::UrlTimeoutError, "Failed to fetch #{resource.to_uri}: Timeout occured."
+            raise ProxyRb::UrlTimeoutError, "Failed to fetch #{resource.to_url}: Timeout occured."
           end
         end
         alias download visit

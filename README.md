@@ -99,6 +99,28 @@ end
 
 ## Development
 
+### Requirements
+
+Go to [the download site](https://www.vaultproject.io/downloads.html) of the
+"Vault Project" and download the latest `vault` binary. Make sure you place it
+into a path which is part of the "PATH"-environment variable - even on Windows.
+
+*Example for a Linux Distribution*
+
+~~~bash
+curl -o /tmp/vault.zip https://releases.hashicorp.com/vault/0.5.1/vault_0.5.1_linux_amd64.zip
+unzip /tmp/vault.zip
+install -D /tmp/vault -m 0755 ~/bin/vault
+~~~
+
+Maybe you want to add the path `~/bin` to `PATH` via `.bashrc` or `.zshrc`.
+
+~~~bash
+export PATH=~/bin:$PATH
+~~~
+
+### Scripts
+
 After checking out the repo, run `script/bootstrap` to install dependencies.
 Then, run `script/console` for an interactive prompt that will allow you to
 experiment.

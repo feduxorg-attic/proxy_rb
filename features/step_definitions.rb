@@ -1,3 +1,5 @@
+require 'vault'
+
 Given(/^a spec file named "([^"]*)" with:$/) do |path, content|
   step %(a file named "#{File.join('spec', path)}" with:), content
 end
@@ -20,4 +22,16 @@ end
 
 Given(/^I use a simple standard proxy/) do
   step 'I set the environment variable "PROXY_TYPE" to "forwarding_proxy"'
+end
+
+Given(/^I use a local vault server with the following data at "(.*)":$/) do |mount_point, table|
+  step 'I run `vault -dev` in background'
+  client = Vault::Client.new(address: ENV['VAULT_ADDR'])
+
+  table.hashes.each do |row|
+    user = row['user'].to_s
+    secret = row['secret'].to_s
+
+    client.logical.write(mount_point, user: user , secret: secret)
+  end
 end
