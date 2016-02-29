@@ -14,7 +14,7 @@ module ProxyRb
     public
 
     def initialize(url)
-      @url = Addressable::URI(url)
+      @url = Addressable::URI.parse(url)
     end
 
     # Convert resource to url

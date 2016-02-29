@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 require 'addressable/uri'
-require 'delegate'
 
 # ProxyRb
 module ProxyRb
   # A ProxyURL
-  class ProxyUrl < SimpleDelegator
+  class ProxyUrl
     #  Build a URL from hash
     #
     #  @param [Hash] hash
@@ -14,7 +13,7 @@ module ProxyRb
     # @return [ProxyUrl]
     #   The built url
     def self.build(hash)
-      new Addressable::URI.new(hash)
+      new(Addressable::URI.new(hash))
     end
 
     # Create URL from string
@@ -25,7 +24,7 @@ module ProxyRb
     # @return [ProxyUrl]
     #   The parsed url
     def self.parse(string)
-      new Addressable::URI.heuristic_parse(string)
+      new(Addressable::URI.heuristic_parse(string.to_s))
     end
 
     # Return URL without user name and password
@@ -33,11 +32,42 @@ module ProxyRb
     # @return [ProxyUrl]
     #   The cleaned url
     def without_user_name_and_password
+      return self.class.new(nil) if empty?
+
       h = __getobj__.to_hash
       h.delete :user
       h.delete :password
 
       self.class.build(h)
+    end
+
+    protected
+
+    attr_reader :url
+
+    public
+
+    def initialize(url)
+      @url = url
+    end
+
+    %i(host user password port).each do |m|
+      define_method m do
+        return nil if empty?
+
+        url.public_send m
+      end
+    end
+
+    def to_s
+      return "" if empty?
+
+      url.to_s
+    end
+
+    # Check if url is empty
+    def empty?
+      url.nil? || url.empty?
     end
   end
 end

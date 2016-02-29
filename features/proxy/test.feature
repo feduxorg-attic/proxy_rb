@@ -9,7 +9,7 @@ Feature: Test Proxy
     And I look for executables in "bin" within the current directory
     And I use a simple standard proxy
 
-  Scenario: Simple HTTP request
+  Scenario: Simple HTTP request with proxy
     Given a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
@@ -148,4 +148,30 @@ Feature: Test Proxy
     And I run `http_proxy` in background
     And I run `http_server` in background
     When I successfully run `rspec`
+    Then the specs should all pass
+
+  Scenario: Simple HTTP request without proxy
+    Given a spec file named "test_spec.rb" with:
+    """
+    require 'spec_helper'
+
+    RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
+      context 'when nil given' do
+        subject { nil }
+        before { visit 'http://localhost:8000' }
+
+        it { expect(request).to be_successful }
+      end
+
+      context 'when no proxy given' do
+        subject { NoProxy }
+
+        before { visit 'http://localhost:8000' }
+
+        it { expect(request).to be_successful }
+      end
+    end
+    """
+    And I run `http_server` in background
+    When I run `rspec`
     Then the specs should all pass

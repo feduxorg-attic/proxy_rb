@@ -25,7 +25,7 @@ module ProxyRb
     #   An array of parameters for PhantomJS
     def to_phantom_js
       result = []
-      result << "--proxy=#{url}"
+      result << "--proxy=#{url}" unless url.empty?
       result << "--proxy-auth=#{credentials}" unless credentials.empty?
 
       result

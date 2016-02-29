@@ -10,8 +10,7 @@ Coveralls::RakeTask.new
 task default: :test
 
 desc 'Run test suite'
-# task test: %w(test:rubocop test:rspec test:cucumber)
-task test: %w(test:cucumber)
+task test: %w(test:rubocop test:rspec test:cucumber)
 
 namespace :test do
   desc 'Test with coveralls'
