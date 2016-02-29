@@ -27,7 +27,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'addressable'
   spec.add_runtime_dependency 'contracts'
   spec.add_runtime_dependency 'excon'
-  #  spec.add_runtime_dependency 'phantomjs'
+
+  spec.add_runtime_dependency 'rspec'
 
   spec.required_ruby_version = '~> 2.3'
 end
