@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :gem do
   require 'bundler/gem_tasks'
 end

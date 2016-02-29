@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'webrick'
 require 'webrick/httpproxy'
 
+# Options
 module Options
   def defaults
     {
@@ -58,7 +60,7 @@ end
 
 proxy = WEBrick::HTTPProxyServer.new options
 
-trap 'INT'  { proxy.shutdown }
-trap 'TERM' { proxy.shutdown }
+trap('INT') { proxy.shutdown }
+trap('TERM') { proxy.shutdown }
 
 proxy.start

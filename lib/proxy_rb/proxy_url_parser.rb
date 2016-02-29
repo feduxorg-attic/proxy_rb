@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'uri'
 require 'addressable/uri'
 require 'proxy_rb/proxy_url'

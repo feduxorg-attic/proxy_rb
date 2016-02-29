@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec.shared_examples 'a loadable proxy.pac' do
   it { loader.load(proxy_pac) }
 end

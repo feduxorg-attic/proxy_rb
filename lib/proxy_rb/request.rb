@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # ProxyRb
 module ProxyRb
   # An HTTP request
@@ -17,7 +18,7 @@ module ProxyRb
     # @return [TrueClass, FalseClass]
     #   The result
     def successful?
-      page.status_code.to_s.start_with?('2') || page.status_code.to_s.start_with?('3')
+      page.status_code.to_s.start_with?('2', '3')
     end
 
     # def forbidden?

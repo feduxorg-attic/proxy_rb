@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'capybara/poltergeist'
 
 require 'proxy_rb'
@@ -69,7 +70,7 @@ module ProxyRb
           end
         end
 
-        #!@method download
+        # !@method download
         #
         # @see #visit
         alias download visit

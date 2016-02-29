@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'proxy_rb/password_fetchers/basic_password_fetcher'
 require 'proxy_rb/user_passwords/vault_user_password'
 
@@ -35,7 +36,7 @@ module ProxyRb
       #   Look up user name
       Contract String => String
       def call(user_name)
-        client.with_retries(::Vault::HTTPConnectionError, ::Vault::HTTPError) do |attempt, e|
+        client.with_retries(::Vault::HTTPConnectionError, ::Vault::HTTPError) do |_attempt, _e|
           UserPasswords::VaultUserPassword.new(
             ::Vault.logical.read(File.join(prefix, user_name))
           ).to_s

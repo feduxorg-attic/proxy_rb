@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'vault'
 
 Given(/^a spec file named "([^"]*)" with:$/) do |path, content|

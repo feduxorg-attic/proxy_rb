@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'contracts'
 require 'proxy_rb/basic_configuration/option'
 require 'proxy_rb/basic_configuration/in_config_wrapper'
@@ -54,8 +55,6 @@ module ProxyRb
       #
       # @option [Object] default
       #   The default value
-      #
-      # rubocop:disable Metrics/CyclomaticComplexity
       def option_accessor(name, opts = {})
         contract = opts[:contract]
         default  = opts[:default]
@@ -73,7 +72,6 @@ module ProxyRb
         # Add reader
         option_reader name, contract: { None => contract.values.first }
       end
-      # rubocop:enable Metrics/CyclomaticComplexity
 
       private
 
@@ -131,11 +129,8 @@ module ProxyRb
 
     # Set if name is option
     def set_if_option(name, *args)
-      if RUBY_VERSION < '1.9'
-        send("#{name}=".to_sym, *args) if option? name
-      else
-        public_send("#{name}=".to_sym, *args) if option? name
-      end
+      send("#{name}=".to_sym, *args) if option? name
+      public_send("#{name}=".to_sym, *args) if option? name
     end
 
     private

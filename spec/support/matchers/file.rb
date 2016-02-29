@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 RSpec::Matchers.define :be_existing_file do |_|
   match { |actual| File.file?(actual) }
 

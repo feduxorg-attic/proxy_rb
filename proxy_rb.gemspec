@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'proxy_rb/version'
@@ -28,5 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'excon'
   #  spec.add_runtime_dependency 'phantomjs'
 
-  spec.required_ruby_version = '~> 2.0'
+  spec.required_ruby_version = '~> 2.3'
 end

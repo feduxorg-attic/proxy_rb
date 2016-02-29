@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'proxy_rb/password_fetchers/basic_password_fetcher'
 require 'proxy_rb/user_passwords/environment_user_password'
 
