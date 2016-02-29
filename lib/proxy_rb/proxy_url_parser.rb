@@ -26,7 +26,7 @@ module ProxyRb
     private
 
     def hostname?(name)
-      name = name.gsub(%r{^[^:]+://}, '').split(/:/).first
+      name = name.to_s.gsub(%r{^[^:]+://}, '').split(/:/).first
 
       /
       \A
@@ -45,7 +45,7 @@ module ProxyRb
     end
 
     def url_hash_for_hostname_port
-      splitted_url = raw_url.split(/:/)
+      splitted_url = raw_url.to_s.split(/:/)
 
       url_hash = {}
       url_hash[:host] = splitted_url.first

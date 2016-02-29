@@ -25,13 +25,14 @@ Given(/^I use a simple standard proxy/) do
 end
 
 Given(/^I use a local vault server with the following data at "(.*)":$/) do |mount_point, table|
-  step 'I run `vault -dev` in background'
+  step 'I run `vault server -dev` in background'
+  sleep 2
   client = Vault::Client.new(address: ENV['VAULT_ADDR'])
 
   table.hashes.each do |row|
-    user = row['user'].to_s
-    secret = row['secret'].to_s
+    user   = row['user'].to_s
+    secret = row['password'].to_s
 
-    client.logical.write(mount_point, user: user , secret: secret)
+    client.logical.write(File.join(mount_point, user), secret: secret)
   end
 end

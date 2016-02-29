@@ -1,3 +1,5 @@
+require 'logger'
+
 # Main
 module ProxyRb
   @debug_mode = false

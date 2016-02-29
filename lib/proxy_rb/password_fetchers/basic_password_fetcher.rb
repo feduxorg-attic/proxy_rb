@@ -1,8 +1,8 @@
 module ProxyRb
   # Fetch password for user...
-  module PasswordFetcher
+  module PasswordFetchers
     # ... process environment
-    class BasicFetcher
+    class BasicPasswordFetcher
       def call(user_name)
         fail NotImplementedError, 'You need to implement `#call` for a valid password fetcher'
       end

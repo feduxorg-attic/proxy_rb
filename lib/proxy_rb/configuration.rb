@@ -3,7 +3,9 @@ require 'contracts'
 require 'proxy_rb/version'
 require 'proxy_rb/basic_configuration'
 require 'proxy_rb/basic_configuration/in_config_wrapper'
-require 'proxy_rb/password_fetcher/env'
+
+require 'proxy_rb/password_fetchers/basic_password_fetcher'
+require 'proxy_rb/password_fetchers/environment_password_fetcher'
 
 # ProxyRb
 module ProxyRb
@@ -11,7 +13,7 @@ module ProxyRb
   #
   # This defines the configuration options of proxy_rb
   class Configuration < BasicConfiguration
-    option_accessor :password_fetcher, contract: { PasswordFetcher::BasicFetcher => PasswordFetcher::BasicFetcher }, default: ProxyRb::PasswordFetcher::Env.new
+    option_accessor :password_fetcher, contract: { PasswordFetchers::BasicPasswordFetcher => PasswordFetchers::BasicPasswordFetcher }, default: ProxyRb::PasswordFetchers::EnvironmentPasswordFetcher.new(prefix: 'SECRET')
   end
 end
 

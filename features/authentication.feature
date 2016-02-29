@@ -17,7 +17,7 @@ Feature: Authenticate agains proxy
     require 'spec_helper'
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
-      subject { 'http://user:password@localhost:8080' }
+      subject { 'http://user1:password@localhost:8080' }
 
       context 'when working proxy chain' do
         before { visit 'http://localhost:8000' }
@@ -35,10 +35,11 @@ Feature: Authenticate agains proxy
     And a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
+    require 'uri'
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
       let(:user_name) { 'user1' }
-      subject { format('http://%s:%s@localhost:8080', user_name, fetch_password(user_name)) }
+      subject { URI::HTTP.build(host: 'localhost', port: 8080, user: user_name, password: password(user_name)) }
 
       context 'when working proxy chain' do
         before { visit 'http://localhost:8000' }
@@ -51,21 +52,22 @@ Feature: Authenticate agains proxy
     Then the specs should all pass
 
   Scenario: Use password from HashiCorp Vault
-    Given I use a local vault server with the following data at "/secret/users":
+    Given I use a local vault server with the following data at "secret":
        | user  | password |
        | user1 | *Test123 |
     And a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
-    require 'proxy_rb/password_fetcher/vault'
+    require 'proxy_rb/password_fetchers/vault_password_fetcher'
+    require 'uri'
 
     ProxyRb.configure do |config|
-      config.password_fetcher = ProxyRb::PasswordFetcher::Vault.new
+      config.password_fetcher = ProxyRb::PasswordFetchers::VaultPasswordFetcher.new(prefix: 'secret')
     end
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
-      let(:user_name) { 'user' }
-      subject { format('http://%s:%s@localhost:8080', user_name, fetch_password(user_name)) }
+      let(:user_name) { 'user1' }
+      subject { URI::HTTP.build(host: 'localhost', port: 8080, user: user_name, password: password(user_name)) }
 
       context 'when working proxy chain' do
         before { visit 'http://localhost:8000' }

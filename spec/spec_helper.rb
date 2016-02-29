@@ -19,4 +19,5 @@ Dir.glob(::File.expand_path('../../../test/support/*.rb', __FILE__)).each { |f| 
 Dir.glob(::File.expand_path('../../../test/support/**/*.rb', __FILE__)).each { |f| require_relative f }
 
 # Avoid writing "describe LocalPac::MyClass do [..]" but "describe MyClass do [..]"
+require 'proxy_rb'
 include ProxyRb

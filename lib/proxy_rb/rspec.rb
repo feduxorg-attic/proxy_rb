@@ -1,7 +1,7 @@
 require 'rspec'
 require 'capybara/rspec'
 
-require 'proxy_rb/main'
+require 'proxy_rb'
 
 ProxyRb.require_files_matching_pattern('rspec/helpers/*.rb')
 ProxyRb.require_files_matching_pattern('rspec/matchers/*.rb')

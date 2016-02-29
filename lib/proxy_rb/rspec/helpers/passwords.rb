@@ -1,4 +1,3 @@
-require 'proxy_rb/configuration'
 require 'contracts'
 
 module ProxyRb
@@ -8,8 +7,8 @@ module ProxyRb
         include Contracts::Core
         include Contracts::Builtin
 
-        Contract Or[String, Symbol] => String
-        def fetch_password(user_name)
+        Contract Or[String, Symbol] => Maybe[String]
+        def password(user_name)
           ProxyRb.config.password_fetcher.call(user_name.to_s)
         end
       end
