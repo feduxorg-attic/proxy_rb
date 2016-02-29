@@ -8,6 +8,7 @@ Feature: Authenticate agains proxy
     Given I use a fixture named "proxy-config"
     And I look for executables in "bin" within the current directory
     And I use a proxy requiring authentication
+    And I use a simple web server
     And I run `http_proxy` in background
     And I run `http_server` in background
 

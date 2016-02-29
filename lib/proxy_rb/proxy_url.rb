@@ -27,20 +27,6 @@ module ProxyRb
       new(Addressable::URI.heuristic_parse(string.to_s))
     end
 
-    # Return URL without user name and password
-    #
-    # @return [ProxyUrl]
-    #   The cleaned url
-    def without_user_name_and_password
-      return self.class.new(nil) if empty?
-
-      h = __getobj__.to_hash
-      h.delete :user
-      h.delete :password
-
-      self.class.build(h)
-    end
-
     protected
 
     attr_reader :url
@@ -68,6 +54,20 @@ module ProxyRb
     # Check if url is empty
     def empty?
       url.nil? || url.empty?
+    end
+
+    # Return URL without user name and password
+    #
+    # @return [ProxyUrl]
+    #   The cleaned url
+    def without_user_name_and_password
+      return self.class.new(nil) if empty?
+
+      h = url.to_hash
+      h.delete :user
+      h.delete :password
+
+      self.class.build(h)
     end
   end
 end

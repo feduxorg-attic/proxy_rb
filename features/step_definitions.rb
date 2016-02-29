@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'vault'
+require 'json'
 
 Given(/^a spec file named "([^"]*)" with:$/) do |path, content|
   step %(a file named "#{File.join('spec', path)}" with:), content
@@ -17,12 +18,39 @@ Given(/^I look for executables in "(.*)" within the current directory$/) do |dir
   prepend_environment_variable 'PATH', expand_path(directory) + ':'
 end
 
+Given(/^I use a simple web server(?: at "(.*)")?$/) do |path|
+  name = if path
+           %(I use a web server at "#{path}" with the following configuration:)
+         else
+           'I use a web server with the following configuration:'
+         end
+  step name, table(%(|option | value |))
+end
+
+Given(/^I use a web server(?: at "(.*)")? with the following configuration:/) do |path, table|
+  path = 'bin/http_server' if path.nil? || path.empty?
+
+  step %(an executable named "#{path}" with:), WebServerGenerator.new.render(table)
+end
+
 Given(/^I use a proxy requiring authentication/) do
-  step 'I set the environment variable "PROXY_TYPE" to "authentication_proxy"'
+  step 'I use a proxy requiring authentication with the following configuration:', table(%(|option | value |))
+end
+
+Given(/^I use a proxy(?: at "(.*)")? requiring authentication with the following configuration:/) do |path, table|
+  path = 'bin/http_proxy' if path.nil? || path.empty?
+
+  step %(an executable named "#{path}" with:), ProxyGenerator.new(type: :authentication).render(table)
 end
 
 Given(/^I use a simple standard proxy/) do
-  step 'I set the environment variable "PROXY_TYPE" to "forwarding_proxy"'
+  step 'I use a proxy with the following configuration:', table(%(|option | value |))
+end
+
+Given(/^I use a proxy(?: at "(.*)")? with the following configuration:/) do |path, table|
+  path = 'bin/http_proxy' if path.nil? || path.empty?
+
+  step %(an executable named "#{path}" with:), ProxyGenerator.new(type: :simple).render(table)
 end
 
 Given(/^I use a local vault server with the following data at "(.*)":$/) do |mount_point, table|
