@@ -17,17 +17,18 @@ module ProxyRb
 
       protected
 
-      attr_reader :prefix
+      attr_reader :prefix, :client
 
       public
 
-      def initialize(prefix:)
+      def initialize(prefix:, client: ::Vault::Client.new(address: ENV['VAULT_ADDR']))
         @prefix = prefix
+        @client = client
       end
 
       Contract String => String
       def call(user_name)
-        ::Vault.with_retries(::Vault::HTTPConnectionError, ::Vault::HTTPError) do |attempt, e|
+        client.with_retries(::Vault::HTTPConnectionError, ::Vault::HTTPError) do |attempt, e|
           UserPasswords::VaultUserPassword.new(
             ::Vault.logical.read(File.join(prefix, user_name))
           ).to_s

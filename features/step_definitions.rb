@@ -27,12 +27,11 @@ end
 Given(/^I use a local vault server with the following data at "(.*)":$/) do |mount_point, table|
   step 'I run `vault server -dev` in background'
   sleep 2
-  client = Vault::Client.new(address: ENV['VAULT_ADDR'])
 
   table.hashes.each do |row|
-    user   = row['user'].to_s
-    secret = row['password'].to_s
+    user     = row['user'].to_s
+    password = row['password'].to_s
 
-    client.logical.write(File.join(mount_point, user), secret: secret)
+    Vault::Client.new(address: ENV['VAULT_ADDR']).logical.write(File.join(mount_point, user), password: password)
   end
 end

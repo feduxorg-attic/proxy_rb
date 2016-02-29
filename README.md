@@ -97,6 +97,15 @@ RSpec.describe 'Infrastructure A' do
 end
 ```
 
+### Authentication
+
+Maybe your proxy servers require authentication and you would like to test this
+as well. You've got several possibilies to use proxy passwords with `proxy_rb`.
+Please have a look at
+["features/authentication.feature"](features/authentication.feature) for
+detailed information.
+
+
 ## Development
 
 ### Requirements

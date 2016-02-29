@@ -65,27 +65,6 @@ Feature: Test Proxy
     When I run `rspec`
     Then the specs should all pass
 
-    @wip
-  Scenario: Simple HTTP request with authentication
-    Given I use a proxy requiring authentication
-    And a spec file named "test_spec.rb" with:
-    """
-    require 'spec_helper'
-
-    RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
-    subject { 'http://user:password@localhost:8080' }
-      context 'when working proxy chain' do
-        before { visit 'http://localhost:8000' }
-
-        it { expect(request).to be_successful }
-      end
-    end
-    """
-    And I run `http_proxy` in background
-    And I run `http_server` in background
-    When I successfully run `rspec`
-    Then the specs should all pass
-
     @broken
   Scenario: Redirected HTTP request
     Given a spec file named "test_spec.rb" with:
