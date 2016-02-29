@@ -1,7 +1,6 @@
 # ProxyRb
 module ProxyRb
   # Basic Configuration
-  #
   class BasicConfiguration
     # A configuration option
     #
@@ -15,8 +14,8 @@ module ProxyRb
         name = opts[:name]
         value = opts[:value]
 
-        fail ArgumentError, '"name" is required' unless opts.key? :name
-        fail ArgumentError, '"value" is required' unless opts.key? :value
+        raise ArgumentError, '"name" is required' unless opts.key? :name
+        raise ArgumentError, '"value" is required' unless opts.key? :value
 
         @name          = name
         @value         = value

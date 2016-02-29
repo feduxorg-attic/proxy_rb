@@ -29,26 +29,25 @@ RSpec.describe HttpProxy do
   end
 
   describe '#to_phantom_js' do
-    let(:phantom_js_params) {
+    let(:phantom_js_params) do
       [
         "--proxy=#{proxy_url}",
         "--proxy-auth=#{credentials}"
       ]
-    }
+    end
 
     it { expect(proxy.to_phantom_js).to eq phantom_js_params }
   end
 
   describe '#to_sym' do
-    let(:proxy_reference) {
+    let(:proxy_reference) do
       [
         proxy_url.host,
         proxy_url.port,
         credentials.user_name
       ].join('_').to_sym
-    }
+    end
 
     it { expect(proxy.to_sym).to eq proxy_reference }
   end
-
 end

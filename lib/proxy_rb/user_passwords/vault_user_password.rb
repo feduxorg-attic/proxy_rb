@@ -1,5 +1,8 @@
+# ProxyRb
 module ProxyRb
+  # User Passwords
   module UserPasswords
+    # Be a password return from vault
     class VaultUserPassword
       include Contracts::Core
       include Contracts::Builtin
@@ -13,7 +16,6 @@ module ProxyRb
       def initialize(response)
         @response = response.data
       end
-
 
       Contract None => String
       def to_s

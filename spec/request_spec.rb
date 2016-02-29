@@ -28,6 +28,4 @@ RSpec.describe Request do
       it { expect(request).not_to be_successful }
     end
   end
-
-
 end

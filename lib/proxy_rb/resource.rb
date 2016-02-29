@@ -1,6 +1,8 @@
-require 'uri'
+require 'addressable/uri'
 
+# ProxyRb
 module ProxyRb
+  # A resource
   class Resource
     attr_accessor :content
 
@@ -11,9 +13,13 @@ module ProxyRb
     public
 
     def initialize(url)
-      @url = URI(url)
+      @url = Addressable::URI(url)
     end
 
+    # Convert resource to url
+    #
+    # @return [String] url
+    #   The url
     def to_url
       url.to_s
     end

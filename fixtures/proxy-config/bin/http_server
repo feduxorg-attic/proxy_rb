@@ -3,10 +3,10 @@
 require 'webrick'
 
 server = WEBrick::HTTPServer.new(
-    :Port => 8000,
+  Port: 8000
 )
 
-server.mount_proc '/' do |req, res|
+server.mount_proc '/' do |_req, res|
   res.body = 'Example Domain'
 end
 

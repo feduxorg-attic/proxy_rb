@@ -1,4 +1,6 @@
+# ProxyRb
 module ProxyRb
+  # An HTTP request
   class Request
     protected
 
@@ -10,8 +12,12 @@ module ProxyRb
       @page = page
     end
 
+    # Was the request successful
+    #
+    # @return [TrueClass, FalseClass]
+    #   The result
     def successful?
-      page.status_code.to_s.start_with?('2')  || page.status_code.to_s.start_with?('3')
+      page.status_code.to_s.start_with?('2') || page.status_code.to_s.start_with?('3')
     end
 
     # def forbidden?

@@ -13,14 +13,17 @@ module ProxyRb
   module Rspec
     # Helpers
     module Helpers
+      # Non includable internal helper methods
+      #
+      # Not for use by normal users
       module NonIncludes
         class << self
           def clear_environment
             %w(
-            http_proxy
-            https_proxy
-            HTTP_PROXY
-            HTTPS_PROXY
+              http_proxy
+              https_proxy
+              HTTP_PROXY
+              HTTPS_PROXY
             ).each { |v| ENV.delete v }
           end
 
@@ -45,10 +48,14 @@ module ProxyRb
       module HttpProxy
         include ::Capybara::DSL
 
+        # The proxy based on subject
         def proxy
           ProxyRb::HttpProxy.new(ProxyUrlParser.new(subject))
         end
 
+        # Visit an URL
+        #
+        # @param [String] url
         def visit(url)
           resource = Resource.new(url)
 
@@ -61,13 +68,18 @@ module ProxyRb
             raise ProxyRb::UrlTimeoutError, "Failed to fetch #{resource.to_url}: Timeout occured."
           end
         end
-        alias download visit
-        alias response page
 
+        #!@method download
+        #
+        # @see #visit
+        alias download visit
+
+        # Get access to the request made
         def request
           Request.new(page)
         end
 
+        # Get access to the response get
         def response
           Response.new(page)
         end

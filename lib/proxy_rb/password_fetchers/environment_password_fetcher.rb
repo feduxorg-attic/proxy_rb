@@ -15,10 +15,13 @@ module ProxyRb
 
       public
 
+      # Prefix of key in Environment
       def initialize(prefix:)
         @prefix = prefix
       end
 
+      # @param [String] user_name
+      #   Look up user name
       Contract String => String
       def call(user_name)
         UserPasswords::EnvironmentUserPassword.new(

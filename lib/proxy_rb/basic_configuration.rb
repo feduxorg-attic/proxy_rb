@@ -4,9 +4,7 @@ require 'proxy_rb/basic_configuration/in_config_wrapper'
 
 # ProxyRb
 module ProxyRb
-  # Basic configuration for ProxyRb
-  #
-  # @private
+  # Basic configuration
   class BasicConfiguration
     include Contracts
 
@@ -32,8 +30,8 @@ module ProxyRb
         contract = opts[:contract]
         default  = opts[:default]
 
-        fail ArgumentError, 'Either use block or default value' if block_given? && default
-        fail ArgumentError, 'contract-options is required' if contract.nil?
+        raise ArgumentError, 'Either use block or default value' if block_given? && default
+        raise ArgumentError, 'contract-options is required' if contract.nil?
 
         Contract contract
         add_option(name, block_given? ? yield(InConfigWrapper.new(known_options)) : default)
@@ -62,9 +60,9 @@ module ProxyRb
         contract = opts[:contract]
         default  = opts[:default]
 
-        fail ArgumentError, 'Either use block or default value' if block_given? && default
+        raise ArgumentError, 'Either use block or default value' if block_given? && default
         # fail ArgumentError, 'Either use block or default value' if !block_given? && default.nil? && default.to_s.empty?
-        fail ArgumentError, 'contract-options is required' if contract.nil?
+        raise ArgumentError, 'contract-options is required' if contract.nil?
 
         # Add writer
         add_option(name, block_given? ? yield(InConfigWrapper.new(known_options)) : default)
@@ -73,7 +71,7 @@ module ProxyRb
         define_method("#{name}=") { |v| find_option(name).value = v }
 
         # Add reader
-        option_reader name, :contract => { None => contract.values.first }
+        option_reader name, contract: { None => contract.values.first }
       end
       # rubocop:enable Metrics/CyclomaticComplexity
 
@@ -82,7 +80,7 @@ module ProxyRb
       def add_option(name, value = nil)
         return if known_options.key?(name)
 
-        known_options[name] = Option.new(:name => name, :value => value)
+        known_options[name] = Option.new(name: name, value: value)
 
         self
       end
@@ -113,7 +111,7 @@ module ProxyRb
 
     # Make deep dup copy of configuration
     def make_copy
-      obj = self.dup
+      obj = dup
       obj.local_options = Marshal.load(Marshal.dump(local_options))
 
       obj
@@ -147,7 +145,7 @@ module ProxyRb
     end
 
     def find_option(name)
-      fail NotImplementedError, %(Unknown option "#{name}") unless option? name
+      raise NotImplementedError, %(Unknown option "#{name}") unless option? name
 
       local_options[name]
     end

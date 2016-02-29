@@ -8,5 +8,4 @@ RSpec.describe Resource do
   describe '#to_url' do
     it { expect(resource.to_url).to eq url }
   end
-
 end

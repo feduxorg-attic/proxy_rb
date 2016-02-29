@@ -58,7 +58,7 @@ end
 
 proxy = WEBrick::HTTPProxyServer.new options
 
-trap 'INT'  do proxy.shutdown end
-trap 'TERM' do proxy.shutdown end
+trap 'INT'  { proxy.shutdown }
+trap 'TERM' { proxy.shutdown }
 
 proxy.start

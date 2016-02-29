@@ -2,7 +2,9 @@ require 'uri'
 require 'addressable/uri'
 require 'proxy_rb/proxy_url'
 
+# ProxyRb
 module ProxyRb
+  # Parse urls for proxies
   class ProxyUrlParser
     protected
 
@@ -12,6 +14,8 @@ module ProxyRb
 
     attr_reader :proxy_url, :credentials
 
+    # @param [String] url
+    #   The url for the proxy configuration
     def initialize(url)
       temporary_url = ProxyUrl.parse(url)
 

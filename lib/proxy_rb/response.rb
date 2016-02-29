@@ -1,4 +1,6 @@
+# ProxyRb
 module ProxyRb
+  # A response
   class Response
     protected
 

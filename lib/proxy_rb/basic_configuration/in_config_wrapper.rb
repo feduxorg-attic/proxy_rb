@@ -1,5 +1,6 @@
 # ProxyRb
 module ProxyRb
+  # Basic Configuration
   class BasicConfiguration
     # In config wrapper
     #
@@ -16,8 +17,8 @@ module ProxyRb
       end
 
       def method_missing(name, *args)
-        fail ArgumentError, 'Options take no argument' if args.count > 0
-        fail UnknownOptionError, %(Option "#{name}" is unknown. Please use only earlier defined options) unless config.key? name
+        raise ArgumentError, 'Options take no argument' if args.count > 0
+        raise UnknownOptionError, %(Option "#{name}" is unknown. Please use only earlier defined options) unless config.key? name
 
         config[name]
       end

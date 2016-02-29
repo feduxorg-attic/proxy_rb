@@ -21,11 +21,18 @@ module ProxyRb
 
       public
 
+      # @param [String] prefix
+      #   Prefix used to look up password for user name
+      #
+      # @param [Vault::Client] client
+      #   The client used to connect to central "Vault" server
       def initialize(prefix:, client: ::Vault::Client.new(address: ENV['VAULT_ADDR']))
         @prefix = prefix
         @client = client
       end
 
+      # @param [String] user_name
+      #   Look up user name
       Contract String => String
       def call(user_name)
         client.with_retries(::Vault::HTTPConnectionError, ::Vault::HTTPError) do |attempt, e|
