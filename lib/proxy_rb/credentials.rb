@@ -20,17 +20,17 @@ module ProxyRb
     end
 
     def empty?
-      user_name? || password?
+      !(user_name? && password?)
     end
 
     private
 
     def user_name?
-      user_name.nil? || user_name.empty?
+      !(user_name.nil? || user_name.empty?)
     end
 
     def password?
-      password.nil? || password.empty?
+      !(password.nil? || password.empty?)
     end
   end
 end

@@ -1,4 +1,5 @@
 require 'uri'
+require 'addressable/uri'
 require 'proxy_rb/proxy_url'
 
 module ProxyRb
@@ -12,37 +13,13 @@ module ProxyRb
     attr_reader :proxy_url, :credentials
 
     def initialize(url)
-      @raw_url = url
+      temporary_url = ProxyUrl.parse(url)
 
-      if hostname?(@raw_url)
-        @proxy_url = ProxyUrl.build(url_hash_for_hostname_port)
-      else
-        @proxy_url = ProxyUrl.build(url_hash_for_url)
-      end
-
-      @credentials = Credentials.new(proxy_url.user, proxy_url.password)
+      @proxy_url   = temporary_url.without_user_name_and_password
+      @credentials = Credentials.new(temporary_url.user, temporary_url.password)
     end
 
     private
-
-    def hostname?(name)
-      name = name.to_s.gsub(%r{^[^:]+://}, '').split(/:/).first
-
-      /
-      \A
-      (
-        (
-          [a-zA-Z0-9]
-          | [a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9]
-        )\.
-      )*
-        (
-          [A-Za-z0-9]
-      | [A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]
-      )
-        \Z
-        /x === name
-    end
 
     def url_hash_for_hostname_port
       splitted_url = raw_url.to_s.split(/:/)
@@ -56,7 +33,19 @@ module ProxyRb
     end
 
     def url_hash_for_url
-      URI(raw_url).hash
+      Addressable::URI.parse(raw_url).to_hash
+    end
+
+    def url?(u)
+      url = Addressable::URI.parse(u)
+
+      return false if url.nil?
+      return false unless /\A[[:alnum:]]+\Z/ === url.scheme
+      return true if url && url.host
+
+      false
+    rescue Addressable::URI::InvalidURIError
+      false
     end
   end
 end

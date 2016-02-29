@@ -11,7 +11,7 @@ RSpec.describe HttpProxy do
     allow(parser).to receive(:credentials).and_return credentials
   end
 
-  let(:proxy_url) { instance_double 'ProxyRb::ProxyUrl' }
+  let(:proxy_url) { double 'ProxyRb::ProxyUrl' }
 
   before :each do
     allow(proxy_url).to receive(:to_s).and_return 'http://localhost:3128'
