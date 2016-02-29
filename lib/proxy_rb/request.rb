@@ -21,9 +21,13 @@ module ProxyRb
       page.status_code.to_s.start_with?('2', '3')
     end
 
-    # def forbidden?
-    #   page.status_code == 403
-    # end
+    # The request is forbidden
+    #
+    # @return [TrueClass, FalseClass]
+    #   The result
+    def forbidden?
+      page.status_code == 403
+    end
 
     # def invalid?
     #   page.status_code == 401
