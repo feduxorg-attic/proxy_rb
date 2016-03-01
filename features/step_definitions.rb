@@ -33,21 +33,21 @@ Given(/^I use a web server(?: at "(.*)")? with the following configuration:/) do
   step %(an executable named "#{path}" with:), WebServerGenerator.new.render(table)
 end
 
-Given(/^I use a proxy requiring authentication/) do
+Given(/^I use a proxy requiring authentication$/) do
   step 'I use a proxy requiring authentication with the following configuration:', table(%(|option | value |))
 end
 
-Given(/^I use a proxy(?: at "(.*)")? requiring authentication with the following configuration:/) do |path, table|
+Given(/^I use a proxy(?: at "(.*)")? requiring authentication with the following configuration:$/) do |path, table|
   path = 'bin/http_proxy' if path.nil? || path.empty?
 
   step %(an executable named "#{path}" with:), ProxyGenerator.new(type: :authentication).render(table)
 end
 
-Given(/^I use a simple standard proxy/) do
+Given(/^I use a simple standard proxy$/) do
   step 'I use a proxy with the following configuration:', table(%(|option | value |))
 end
 
-Given(/^I use a proxy(?: at "(.*)")? with the following configuration:/) do |path, table|
+Given(/^I use a proxy(?: at "(.*)")? with the following configuration:$/) do |path, table|
   path = 'bin/http_proxy' if path.nil? || path.empty?
 
   step %(an executable named "#{path}" with:), ProxyGenerator.new(type: :simple).render(table)
