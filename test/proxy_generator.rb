@@ -18,7 +18,7 @@ class ProxyGenerator
         format("htpasswd.set_passwd 'Proxy Realm', %s, %s", k, v)
       end.join("\n")
 
-      config = config_db.map { |k, v| format('%s: %s,', k, v) }.join(', ')
+      config = (config_db.map { |k, v| format('%s: %s', k, v) } + ['ProxyAuthProc: authenticator.method(:authenticate).to_proc']).join(', ')
 
       <<~EOS
       #!/usr/bin/env ruby
@@ -27,7 +27,7 @@ class ProxyGenerator
       require 'webrick/httpproxy'
 
       # Apache compatible Password manager
-      htpasswd = WEBrick::HTTPAuth::Htpasswd.new File.expand_path('../htpasswd', __FILE__)
+      htpasswd = WEBrick::HTTPAuth::Htpasswd.new File.expand_path('../../config/htpasswd', __FILE__)
       # Create entry with username and password, the password is "crypt" encrypted
       #{users}
       # Write file to disk
@@ -39,10 +39,10 @@ class ProxyGenerator
         UserDB: htpasswd
       )
 
-      proxy = WEBrick::HTTPProxyServer.new ProxyAuthProc: authenticator.method(:authenticate).to_proc, #{config}
+      proxy = WEBrick::HTTPProxyServer.new #{config}
 
-        trap 'INT'  do proxy.shutdown end
-      trap 'TERM' do proxy.shutdown end
+      trap('INT') { proxy.shutdown }
+      trap('TERM') { proxy.shutdown }
 
       proxy.start
       EOS
@@ -72,8 +72,8 @@ class ProxyGenerator
 
       proxy = WEBrick::HTTPProxyServer.new #{config}
 
-      trap 'INT'  do proxy.shutdown end
-      trap 'TERM' do proxy.shutdown end
+      trap('INT') { proxy.shutdown }
+      trap('TERM') { proxy.shutdown }
 
       proxy.start
       EOS

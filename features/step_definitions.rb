@@ -64,3 +64,18 @@ Given(/^I use a local vault server with the following data at "(.*)":$/) do |mou
     Vault::Client.new(address: ENV['VAULT_ADDR']).logical.write(File.join(mount_point, user), password: password)
   end
 end
+
+Given(/^the following local users are authorized to use the proxy:$/) do |table|
+  require 'webrick/httpauth/htpasswd'
+  create_directory('config')
+  htpasswd = WEBrick::HTTPAuth::Htpasswd.new expand_path('config/htpasswd')
+
+  table.hashes.each do |row|
+    user     = row['user'].to_s
+    password = row['password'].to_s
+
+    htpasswd.set_passwd 'Proxy Realm', user, password
+  end
+
+  htpasswd.flush
+end
