@@ -6,7 +6,7 @@ Feature: Choose driver to sent requests to proxy
     And I use a simple standard proxy
     And I use a simple web server
 
-  Scenario: Use Poltergeist (default)
+  Scenario: Use Webkit (default)
     Given a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
@@ -29,6 +29,7 @@ Feature: Choose driver to sent requests to proxy
     Given a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
+    require 'proxy_rb/drivers/poltergeist_driver'
 
     ProxyRb.configure do |config|
       config.driver = ProxyRb::Drivers::PoltergeistDriver.new
