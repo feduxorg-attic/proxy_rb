@@ -8,7 +8,7 @@ RSpec.describe Credentials do
   let(:password) { '*Test123' }
 
   it { expect(credentials.user_name).to eq user_name }
-  it { expect { credentials.password }.to raise_error NoMethodError }
+  it { expect(credentials.password).to eq password }
 
   describe '#to_s' do
     it { expect(credentials.to_s).to eq format('%s:%s', user_name, password) }
