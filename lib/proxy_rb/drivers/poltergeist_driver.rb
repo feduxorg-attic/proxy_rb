@@ -1,5 +1,11 @@
 require 'proxy_rb/drivers/basic_driver'
-require 'capybara/poltergeist'
+
+begin
+  require 'capybara/poltergeist'
+rescue LoadError
+  ProxyRb.logger.error %(Error loading `poltergeist`-gem. Please add `gem poltergeist` to your `Gemfile`)
+  exit 1
+end
 
 module ProxyRb
   module Drivers

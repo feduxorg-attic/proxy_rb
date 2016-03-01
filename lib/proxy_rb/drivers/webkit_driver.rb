@@ -1,5 +1,11 @@
 require 'proxy_rb/drivers/basic_driver'
-require 'capybara/webkit'
+
+begin
+  require 'capybara/webkit'
+rescue LoadError
+  ProxyRb.logger.error %(Error loading `capybara-webkit`-gem. Please add `gem capybara-webkit` to your `Gemfile`)
+  exit 1
+end
 
 module ProxyRb
   module Drivers
