@@ -24,7 +24,16 @@ module ProxyRb
     # @return [ProxyUrl]
     #   The parsed url
     def self.parse(string)
-      new(Addressable::URI.heuristic_parse(string.to_s))
+      string = string.to_s
+      string = if string.empty?
+                 string
+               elsif string.start_with?('http://') 
+                 string
+               else
+                 'http://' + string
+               end
+
+      new(Addressable::URI.heuristic_parse(string))
     end
 
     protected

@@ -105,6 +105,12 @@ Please have a look at
 ["features/authentication.feature"](features/authentication.feature) for
 detailed information.
 
+### Driver
+
+You can choose between two drivers to sent your requests: "Poltergeist" and
+"Webkit". Please have a look at
+["features/drivers.feature"](features/drivers.feature) for detailed
+information.
 
 ## Development
 

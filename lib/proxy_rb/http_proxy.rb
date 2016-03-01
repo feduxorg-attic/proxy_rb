@@ -8,38 +8,12 @@ require 'proxy_rb/proxy_url_parser'
 module ProxyRb
   # Represent proxy
   class HttpProxy
-    protected
-
     attr_reader :url, :credentials
-
-    public
 
     def initialize(parser)
       @url         = parser.proxy_url
       @credentials = parser.credentials
     end
-
-    # Convert to parameters for PhantomJS
-    #
-    # @return [Array]
-    #   An array of parameters for PhantomJS
-    def to_phantom_js
-      result = []
-      result << "--proxy=#{url}" unless url.empty?
-      result << "--proxy-auth=#{credentials}" unless credentials.empty?
-
-      result
-    end
-
-    # Convert to symbol to reference the proxy
-    #
-    # @return [Symbol]
-    #   <host>_<port>_<credentials>
-    def to_sym
-      Shellwords.escape(*[host, port, credentials.user_name].compact.join('_')).to_sym
-    end
-
-    private
 
     def host
       url.host
@@ -47,6 +21,22 @@ module ProxyRb
 
     def port
       url.port
+    end
+
+    def user
+      credentials.user_name
+    end
+
+    def password
+      credentials.password
+    end
+
+    # Convert to symbol to reference the proxy
+    #
+    # @return [Symbol]
+    #   <host>_<port>_<credentials>
+    def to_ref
+      Shellwords.escape(*[host, port, user].compact.join('_')).to_sym
     end
   end
 end

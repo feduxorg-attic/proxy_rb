@@ -6,15 +6,20 @@ module ProxyRb
     class WebkitDriver < BasicDriver
       def register(proxy)
         options = {
-          proxy: proxy.to_hash,
+          proxy: {
+            host: proxy.host,
+            port: proxy.port,
+            user: proxy.user,
+            pass: proxy.password
+          }
         }
 
-        ::Capybara.register_driver proxy.to_sym do |app|
+        ::Capybara.register_driver proxy.to_ref do |app|
           ::Capybara::Webkit::Driver.new(app, options)
         end
 
         ::Capybara.run_server = false
-        ::Capybara.current_driver = proxy.to_sym
+        ::Capybara.current_driver = proxy.to_ref
       end
 
       def rescuable_errors

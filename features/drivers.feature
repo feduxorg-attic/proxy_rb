@@ -31,7 +31,7 @@ Feature: Choose driver to sent requests to proxy
     require 'spec_helper'
 
     ProxyRb.configure do |config|
-      config.driver = ProxyRb::Drivers::Poltergeist.new
+      config.driver = ProxyRb::Drivers::PoltergeistDriver.new
     end
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
@@ -52,9 +52,10 @@ Feature: Choose driver to sent requests to proxy
     Given a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
+    require 'proxy_rb/drivers/webkit_driver'
 
     ProxyRb.configure do |config|
-      config.driver = ProxyRb::Drivers::Webkit.new
+      config.driver = ProxyRb::Drivers::WebkitDriver.new
     end
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
