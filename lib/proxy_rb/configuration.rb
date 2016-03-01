@@ -8,6 +8,8 @@ require 'proxy_rb/basic_configuration/in_config_wrapper'
 require 'proxy_rb/password_fetchers/basic_password_fetcher'
 require 'proxy_rb/password_fetchers/environment_password_fetcher'
 
+require 'proxy_rb/drivers/poltergeist'
+
 # ProxyRb
 module ProxyRb
   # ProxyRb Configuration
@@ -15,6 +17,7 @@ module ProxyRb
   # This defines the configuration options of proxy_rb
   class Configuration < BasicConfiguration
     option_accessor :password_fetcher, contract: { PasswordFetchers::BasicPasswordFetcher => PasswordFetchers::BasicPasswordFetcher }, default: ProxyRb::PasswordFetchers::EnvironmentPasswordFetcher.new(prefix: 'SECRET')
+    option_accessor :driver, contract: { Drivers::BasicDriver => Drivers::BasicDriver }, default: ProxyRb::Drivers::PoltergeistDrvier.new
   end
 end
 

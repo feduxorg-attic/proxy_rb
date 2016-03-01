@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'capybara/poltergeist'
 
 require 'proxy_rb'
 require 'proxy_rb/resource'
@@ -29,18 +28,7 @@ module ProxyRb
           end
 
           def register_capybara_driver_for_proxy(proxy)
-            options = {
-              phantomjs_options: proxy.to_phantom_js,
-              js_errors: false,
-              phantomjs_logger: $stderr
-            }
-
-            ::Capybara.register_driver proxy.to_sym do |app|
-              ::Capybara::Poltergeist::Driver.new(app, options)
-            end
-
-            ::Capybara.run_server = false
-            ::Capybara.current_driver = proxy.to_sym
+            ProxyRb.config.driver.register proxy
           end
         end
       end
@@ -65,7 +53,7 @@ module ProxyRb
 
           begin
             super(resource.to_url)
-          rescue ::Capybara::Poltergeist::TimeoutError
+          rescue ProxyRb.config.driver.rescuable_errors
             raise ProxyRb::UrlTimeoutError, "Failed to fetch #{resource.to_url}: Timeout occured."
           end
         end

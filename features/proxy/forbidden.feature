@@ -12,7 +12,7 @@ Feature: Test if access is forbidden
   Scenario: Simple HTTP request with proxy which is redirected with 301 status code
     Given I use a web server at "bin/http_server" with the following configuration:
       | option   | value            |
-      | response | {"status": 403 } |
+      | response | { "status": 403 } |
     And a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
