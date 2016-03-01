@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'proxy_rb/drivers/basic_driver'
+require 'capybara'
 
 begin
   require 'capybara/poltergeist'
@@ -33,7 +34,6 @@ module ProxyRb
           ::Capybara::Poltergeist::Driver.new(app, options)
         end
 
-        ::Capybara.run_server = false
         ::Capybara.current_driver = proxy.to_ref
       end
 

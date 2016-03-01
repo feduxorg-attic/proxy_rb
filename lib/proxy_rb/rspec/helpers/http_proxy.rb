@@ -27,6 +27,10 @@ module ProxyRb
             ).each { |v| ENV.delete v }
           end
 
+          def configure_driver
+            ProxyRb.config.driver.configure_driver
+          end
+
           def register_capybara_driver_for_proxy(proxy)
             ProxyRb.config.driver.register proxy
           end
@@ -49,6 +53,7 @@ module ProxyRb
           resource = Resource.new(url)
 
           NonIncludes.clear_environment
+          NonIncludes.configure_driver
           NonIncludes.register_capybara_driver_for_proxy(proxy)
 
           begin

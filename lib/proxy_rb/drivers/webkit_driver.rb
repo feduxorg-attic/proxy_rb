@@ -14,6 +14,15 @@ module ProxyRb
   module Drivers
     # Driver for Capybara-Webkit
     class WebkitDriver < BasicDriver
+      # Configure driver
+      def configure_driver
+        ::Capybara::Webkit.configure do |config|
+          config.allow_unknown_urls
+        end
+
+        super
+      end
+
       # Register proxy
       #
       # @param [HttpProxy] proxy
@@ -32,7 +41,6 @@ module ProxyRb
           ::Capybara::Webkit::Driver.new(app, options)
         end
 
-        ::Capybara.run_server = false
         ::Capybara.current_driver = proxy.to_ref
       end
 
