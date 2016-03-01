@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 10.0'
 
   spec.add_runtime_dependency 'capybara'
-  spec.add_runtime_dependency 'poltergeist'
+  spec.add_runtime_dependency 'capybara-webkit'
 
   spec.add_runtime_dependency 'addressable'
   spec.add_runtime_dependency 'contracts'

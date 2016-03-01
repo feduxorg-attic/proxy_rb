@@ -12,3 +12,7 @@ before_install:
   - curl -o /tmp/vault.zip https://releases.hashicorp.com/vault/0.5.1/vault_0.5.1_linux_amd64.zip
   - unzip /tmp/vault.zip
   - install -D -m 0755 /tmp/vault ./bin/vault
+addons:
+  apt:
+    packages:
+      -  libwebkit-dev
