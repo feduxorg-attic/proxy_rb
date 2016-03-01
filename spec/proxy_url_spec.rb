@@ -39,10 +39,10 @@ RSpec.describe ProxyUrl do
       it { expect(proxy.host).to eq 'proxy.example.org' }
     end
 
-    context 'when user:password@host.domain:port' do
-      let(:descriptor) { 'http://user1:password1@proxy.example.org:8080' }
+    context 'when user:*Test123@host.domain:port' do
+      let(:descriptor) { 'http://user1:*Test123@proxy.example.org:8080' }
 
-      it { expect(proxy.to_s).to eq 'http://user1:password1@proxy.example.org:8080' }
+      it { expect(proxy.to_s).to eq 'http://user1:*Test123@proxy.example.org:8080' }
       it { expect(proxy.port).to eq 8080 }
       it { expect(proxy.host).to eq 'proxy.example.org' }
       it { expect(proxy.user).to eq 'user1' }
@@ -73,8 +73,8 @@ RSpec.describe ProxyUrl do
   describe '#empty?' do
     subject(:proxy) { described_class.parse(descriptor) }
 
-    context 'when user:password@host.domain:port' do
-      let(:descriptor) { 'http://user1:password1@proxy.example.org:8080' }
+    context 'when user:*Test123@host.domain:port' do
+      let(:descriptor) { 'http://user1:*Test123@proxy.example.org:8080' }
 
       it { expect(proxy).not_to be_empty }
     end

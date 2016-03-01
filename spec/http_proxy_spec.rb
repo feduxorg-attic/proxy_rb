@@ -23,7 +23,7 @@ RSpec.describe HttpProxy do
   let(:credentials) { instance_double 'ProxyRb::Credentials' }
 
   before :each do
-    allow(credentials).to receive(:to_s).and_return 'user1:password'
+    allow(credentials).to receive(:to_s).and_return 'user1:*Test123'
     allow(credentials).to receive(:nil?).and_return false
     allow(credentials).to receive(:empty?).and_return false
     allow(credentials).to receive(:user_name).and_return 'user1'

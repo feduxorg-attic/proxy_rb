@@ -11,6 +11,9 @@ Feature: Authenticate agains proxy
     And I use a simple web server
     And I run `http_proxy` in background
     And I run `http_server` in background
+    And the following local users are authorized to use the proxy:
+      | user  | password |
+      | user1 | *Test123 |
 
   Scenario: Set authentication via subject (not recommended)
 
@@ -22,7 +25,7 @@ Feature: Authenticate agains proxy
     require 'spec_helper'
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
-      subject { 'http://user1:password@localhost:8080' }
+      subject { 'http://user1:*Test123@localhost:8080' }
 
       context 'when working proxy chain' do
         before { visit 'http://localhost:8000' }

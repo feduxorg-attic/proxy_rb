@@ -5,7 +5,7 @@ require 'proxy_rb/credentials'
 RSpec.describe Credentials do
   subject(:credentials) { described_class.new(user_name, password) }
   let(:user_name) { 'user1' }
-  let(:password) { 'password' }
+  let(:password) { '*Test123' }
 
   it { expect(credentials.user_name).to eq user_name }
   it { expect { credentials.password }.to raise_error NoMethodError }
