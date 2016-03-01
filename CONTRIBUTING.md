@@ -17,7 +17,7 @@ Here are some ways *you* can contribute:
 * by closing [issues][]
 * by reviewing patches
 
-[issues]: https://github.com/fedux-org/proxy_pac_rb/issues
+[issues]: https://github.com/fedux-org/proxy_rb/issues
 
 ## Submitting an Issue
 
@@ -25,7 +25,7 @@ We use the [GitHub issue tracker][issues] to track bugs and features. Before
 submitting a bug report or feature request, check to make sure it hasn't
 already been submitted. 
 
-When submitting a bug report, please include a [Gist][] that includes a *stack
+When submitting a bug report, please include a [Gist][gist] that includes a *stack
 trace* and any details that may be necessary to reproduce the bug, including
 your *gem version*, *Ruby version*, and *operating system*. Ideally, a bug report
 should include a pull request with failing specs.
