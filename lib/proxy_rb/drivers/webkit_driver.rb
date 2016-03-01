@@ -8,23 +8,18 @@ rescue LoadError
   exit 1
 end
 
+# rubocop:disable Style/SymbolProc
+::Capybara::Webkit.configure do |config|
+  config.allow_unknown_urls
+end
+# rubocop:enable Style/SymbolProc
+
 # ProxyRb
 module ProxyRb
   # Drivers
   module Drivers
     # Driver for Capybara-Webkit
     class WebkitDriver < BasicDriver
-      # Configure driver
-      def configure_driver
-        # rubocop:disable Style/SymbolProc
-        ::Capybara::Webkit.configure do |config|
-          config.allow_unknown_urls
-        end
-        # rubocop:enable Style/SymbolProc
-
-        super
-      end
-
       # Register proxy
       #
       # @param [HttpProxy] proxy
