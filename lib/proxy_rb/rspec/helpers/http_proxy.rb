@@ -58,7 +58,7 @@ module ProxyRb
 
           begin
             super(resource.to_url)
-          rescue ProxyRb.config.driver.rescuable_errors
+          rescue *ProxyRb.config.driver.rescuable_errors
             raise ProxyRb::UrlTimeoutError, "Failed to fetch #{resource.to_url}: Timeout occured."
           end
         end
