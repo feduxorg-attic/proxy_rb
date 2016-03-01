@@ -35,8 +35,10 @@ module ProxyRb
           phantomjs_logger: $stderr
         }
 
-        ::Capybara.register_driver proxy.to_ref do |app|
-          ::Capybara::Poltergeist::Driver.new(app, options)
+        unless ::Capybara.drivers.key? proxy.to_ref
+          ::Capybara.register_driver proxy.to_ref do |app|
+            ::Capybara::Poltergeist::Driver.new(app, options)
+          end
         end
 
         ::Capybara.current_driver = proxy.to_ref

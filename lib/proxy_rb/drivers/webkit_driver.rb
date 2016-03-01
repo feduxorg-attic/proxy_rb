@@ -44,8 +44,10 @@ module ProxyRb
           }
         }
 
-        ::Capybara.register_driver proxy.to_ref do |app|
-          ::Capybara::Webkit::Driver.new(app, Capybara::Webkit::Configuration.to_hash.merge(options))
+        unless ::Capybara.drivers.key? proxy.to_ref
+          ::Capybara.register_driver proxy.to_ref do |app|
+            ::Capybara::Webkit::Driver.new(app, Capybara::Webkit::Configuration.to_hash.merge(options))
+          end
         end
 
         ::Capybara.current_driver = proxy.to_ref
