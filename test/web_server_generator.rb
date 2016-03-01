@@ -8,7 +8,7 @@ class WebServerGenerator
       a[e[:option].to_sym] = e[:value]
     end
 
-    response_field = config_db.delete('response')
+    response_field = config_db.delete(:response)
 
     response_data = if response_field
                       {
