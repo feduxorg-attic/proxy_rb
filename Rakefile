@@ -1,7 +1,7 @@
 #!/usr/bin/env rake
 # frozen_string_literal: true
 
-namespace :gems do
+namespace :gem do
   require 'bundler/gem_tasks'
 end
 
