@@ -27,7 +27,7 @@ module ProxyRb
       string = string.to_s
       string = if string.empty?
                  string
-               elsif string.start_with?('http://') 
+               elsif string.start_with?('http://')
                  string
                else
                  'http://' + string
@@ -55,7 +55,7 @@ module ProxyRb
     end
 
     def to_s
-      return "" if empty?
+      return '' if empty?
 
       url.to_s
     end

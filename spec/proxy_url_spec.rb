@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 require 'proxy_rb/proxy_url'
 
@@ -51,21 +52,21 @@ RSpec.describe ProxyUrl do
     context 'when empty string' do
       let(:descriptor) { '' }
 
-      it { expect(proxy.to_s).to eq "" }
+      it { expect(proxy.to_s).to eq '' }
       it { expect(proxy.port).to eq nil }
-      it { expect(proxy.host).to eq nil}
-      it { expect(proxy.user).to eq nil}
-      it { expect(proxy.password).to eq nil}
+      it { expect(proxy.host).to eq nil }
+      it { expect(proxy.user).to eq nil }
+      it { expect(proxy.password).to eq nil }
     end
 
     context 'when nil' do
       let(:descriptor) { nil }
 
-      it { expect(proxy.to_s).to eq "" }
+      it { expect(proxy.to_s).to eq '' }
       it { expect(proxy.port).to eq nil }
-      it { expect(proxy.host).to eq nil}
-      it { expect(proxy.user).to eq nil}
-      it { expect(proxy.password).to eq nil}
+      it { expect(proxy.host).to eq nil }
+      it { expect(proxy.user).to eq nil }
+      it { expect(proxy.password).to eq nil }
     end
   end
 

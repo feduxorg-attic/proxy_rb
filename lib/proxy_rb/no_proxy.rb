@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 # No proxy
 class NoProxy
   def self.to_s
-    ""
+    ''
   end
 
   def self.nil?
@@ -21,6 +22,6 @@ class NoProxy
   end
 
   def to_s
-    ""
+    ''
   end
 end

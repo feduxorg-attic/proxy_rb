@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Proxy Generator
 class ProxyGenerator
   # Authentication Proxy
@@ -17,7 +18,7 @@ class ProxyGenerator
         format("htpasswd.set_passwd 'Proxy Realm', %s, %s", k, v)
       end.join("\n")
 
-      config = config_db.map { |k,v| format('%s: %s,', k, v) }.join(', ')
+      config = config_db.map { |k, v| format('%s: %s,', k, v) }.join(', ')
 
       <<~EOS
       #!/usr/bin/env ruby
@@ -61,7 +62,7 @@ class ProxyGenerator
         a[e[:option]] = e[:value]
       end
 
-      config = config_db.map { |k,v| format('%s: %s', k, v) }.join(', ')
+      config = config_db.map { |k, v| format('%s: %s', k, v) }.join(', ')
 
       <<~EOS
       #!/usr/bin/env ruby

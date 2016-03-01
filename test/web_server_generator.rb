@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Web Server Generator
 class WebServerGenerator
   def render(table)
@@ -9,7 +10,6 @@ class WebServerGenerator
 
     response_field = config_db.delete('response')
 
-
     response_data = if response_field
                       {
                         'body' => '"Example Domain"'
@@ -20,7 +20,7 @@ class WebServerGenerator
                       }
                     end
 
-    response = response_data.each_with_object([]) do |(k,v), a|
+    response = response_data.each_with_object([]) do |(k, v), a|
       if k == 'header'
         v.each do |header_k, header_v|
           a << format('res.%s["%s"] = "%s"', k, header_k, header_v)
@@ -30,7 +30,7 @@ class WebServerGenerator
       end
     end.join("\n")
 
-    config = config_db.map { |k,v| format('%s: %s', k, v) }.join(', ')
+    config = config_db.map { |k, v| format('%s: %s', k, v) }.join(', ')
 
     <<~EOS
     #!/usr/bin/env ruby
@@ -44,6 +44,5 @@ class WebServerGenerator
 
     server.start
     EOS
-
   end
 end

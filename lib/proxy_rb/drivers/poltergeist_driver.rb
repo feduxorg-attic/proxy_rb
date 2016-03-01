@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'proxy_rb/drivers/basic_driver'
 
 begin
@@ -7,9 +8,16 @@ rescue LoadError
   exit 1
 end
 
+# ProxyRb
 module ProxyRb
+  # Drivers
   module Drivers
+    # Driver for Poltergeist
     class PoltergeistDriver < BasicDriver
+      # Register proxy
+      #
+      # @param [HttpProxy] proxy
+      #   The HTTP proxy which should be used for fetching content
       def register(proxy)
         cli_parameters = []
         cli_parameters << "--proxy=#{proxy.url}" unless proxy.url.empty?
