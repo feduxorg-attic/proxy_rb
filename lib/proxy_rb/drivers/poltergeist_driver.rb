@@ -30,7 +30,7 @@ module ProxyRb
         cli_parameters << "--proxy-auth=#{proxy.credentials}" unless proxy.credentials.empty?
 
         options = {
-           phantomjs_options: cli_parameters,
+          phantomjs_options: cli_parameters,
           js_errors: false,
           phantomjs_logger: $stderr
         }

@@ -16,9 +16,11 @@ module ProxyRb
     class WebkitDriver < BasicDriver
       # Configure driver
       def configure_driver
+        # rubocop:disable Style/SymbolProc
         ::Capybara::Webkit.configure do |config|
           config.allow_unknown_urls
         end
+        # rubocop:enable Style/SymbolProc
 
         super
       end
