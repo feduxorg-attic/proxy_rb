@@ -68,7 +68,7 @@ Feature: Authenticate agains proxy
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
       let(:user_name) { 'user1' }
-      subject { URI::HTTP.build(host: 'localhost', port: 8080, user: user_name, password: password(user_name)) }
+      subject { ProxyRb::ProxyUrl.build(host: 'localhost', port: 8080, user: user_name, password: password(user_name)) }
 
       context 'when working proxy chain' do
         before { visit 'http://localhost:8000' }
@@ -96,7 +96,7 @@ Feature: Authenticate agains proxy
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
       let(:user_name) { 'user1' }
-      subject { URI::HTTP.build(host: 'localhost', port: 8080, user: user_name, password: password(user_name)) }
+      subject { ProxyRb::ProxyUrl.build(host: 'localhost', port: 8080, user: user_name, password: password(user_name)) }
 
       context 'when working proxy chain' do
         before { visit 'http://localhost:8000' }
