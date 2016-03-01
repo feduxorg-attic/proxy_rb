@@ -32,7 +32,7 @@ module ProxyRb
     end
 
     def empty?
-      host.nil? || empty.empty?
+      host.nil? || host.empty?
     end
 
     # Convert to symbol to reference the proxy

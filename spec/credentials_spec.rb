@@ -11,7 +11,7 @@ RSpec.describe Credentials do
   it { expect(credentials.password).to eq password }
 
   describe '#to_s' do
-    it { expect(credentials.to_s).to eq format('%s:%s', user_name, password) }
+    it { expect(credentials.to_s).to eq format('%s:%s', user_name, Shellwords.escape(password)) }
   end
 
   describe '#empty?' do

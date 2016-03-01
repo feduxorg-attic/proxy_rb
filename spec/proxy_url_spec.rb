@@ -46,7 +46,7 @@ RSpec.describe ProxyUrl do
       it { expect(proxy.port).to eq 8080 }
       it { expect(proxy.host).to eq 'proxy.example.org' }
       it { expect(proxy.user).to eq 'user1' }
-      it { expect(proxy.password).to eq 'password1' }
+      it { expect(proxy.password).to eq '*Test123' }
     end
 
     context 'when empty string' do
