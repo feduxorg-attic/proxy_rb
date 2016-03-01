@@ -31,6 +31,10 @@ module ProxyRb
       credentials.password
     end
 
+    def empty?
+      host.nil? || empty.empty?
+    end
+
     # Convert to symbol to reference the proxy
     #
     # @return [Symbol]

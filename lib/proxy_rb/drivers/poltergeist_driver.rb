@@ -20,12 +20,17 @@ module ProxyRb
       # @param [HttpProxy] proxy
       #   The HTTP proxy which should be used for fetching content
       def register(proxy)
+        if proxy.empty?
+          ::Capybara.current_driver = :poltergeist
+          return
+        end
+
         cli_parameters = []
         cli_parameters << "--proxy=#{proxy.url}" unless proxy.url.empty?
         cli_parameters << "--proxy-auth=#{proxy.credentials}" unless proxy.credentials.empty?
 
         options = {
-          phantomjs_options: cli_parameters,
+           phantomjs_options: cli_parameters,
           js_errors: false,
           phantomjs_logger: $stderr
         }

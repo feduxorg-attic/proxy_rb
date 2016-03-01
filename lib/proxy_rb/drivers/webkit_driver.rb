@@ -28,6 +28,11 @@ module ProxyRb
       # @param [HttpProxy] proxy
       #   The HTTP proxy which should be used for fetching content
       def register(proxy)
+        if proxy.empty?
+          ::Capybara.current_driver = :webkit
+          return
+        end
+
         options = {
           proxy: {
             host: proxy.host,
