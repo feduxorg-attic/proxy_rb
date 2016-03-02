@@ -8,18 +8,18 @@ end
 # require 'bundler'
 # Bundler.require :default, :test, :development
 
-require 'coveralls/rake/task'
-Coveralls::RakeTask.new
-
 task default: :test
 
 desc 'Run test suite'
 task test: %w(test:rubocop test:rspec test:cucumber)
 
-namespace :test do
-  desc 'Test with coveralls'
-  task coveralls: %w(test coveralls:push)
+require 'coveralls/rake/task'
+Coveralls::RakeTask.new
 
+desc 'Test with coveralls'
+task coveralls: %w(test coveralls:push)
+
+namespace :test do
   require 'rubocop/rake_task'
   RuboCop::RakeTask.new
 

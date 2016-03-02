@@ -4,10 +4,11 @@ env:
 language: ruby
 bundler_args: --without development debug profile
 rvm:
-  - 2.1.5
-  - 2.2.3
+  - 2.1.8
+  - 2.2.4
   - 2.3.0
-script: script/test
+  - ruby-head
+script: bin/test
 before_install:
   - curl -o /tmp/vault.zip https://releases.hashicorp.com/vault/0.5.1/vault_0.5.1_linux_amd64.zip
   - unzip /tmp/vault.zip
