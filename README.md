@@ -1,5 +1,11 @@
 # ProxyRb
 
+[![Build Status](https://travis-ci.org/fedux-org/proxy_rb.png?branch=master)](https://travis-ci.org/fedux-org/proxy_rb)
+[![Code Climate](https://codeclimate.com/github/fedux-org/proxy_rb.png)](https://codeclimate.com/github/fedux-org/proxy_rb)
+[![Coverage Status](https://coveralls.io/repos/fedux-org/proxy_rb/badge.png?branch=master)](https://coveralls.io/r/fedux-org/proxy_rb?branch=master)
+[![Gem Version](https://badge.fury.io/rb/proxy_rb.png)](http://badge.fury.io/rb/proxy_rb)
+[![Downloads](http://img.shields.io/gem/dt/proxy_rb.svg?style=flat)](http://rubygems.org/gems/proxy_rb)
+
 `proxy_rb` makes it easier for you to test your proxy infrastructre.
 
 ## Installation
