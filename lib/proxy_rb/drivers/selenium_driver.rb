@@ -19,15 +19,12 @@ module ProxyRb
           return
         end
 
-        options = {
-          proxy: {
-            http: proxy.url.to_s
-          }
-        }
+        profile = Selenium::WebDriver::Firefox::Profile.new
+        profile.proxy = Selenium::WebDriver::Proxy.new(http: format('%s:%s', proxy.host, proxy.port))
 
         unless ::Capybara.drivers.key? proxy.to_ref
           ::Capybara.register_driver proxy.to_ref do |app|
-            ::Capybara::Selenium::Driver.new(app, options)
+            ::Capybara::Selenium::Driver.new(app, profile: profile)
           end
         end
 
