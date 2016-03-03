@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'poltergeist'
+gem 'selenium-webdriver'
 
 group :debug do
   gem 'pry'
