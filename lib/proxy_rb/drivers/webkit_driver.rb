@@ -3,8 +3,8 @@ require 'proxy_rb/drivers/basic_driver'
 
 begin
   require 'capybara/webkit'
-rescue LoadError
-  ProxyRb.logger.error %(Error loading `capybara-webkit`-gem. Please add `gem capybara-webkit` to your `Gemfile`)
+rescue LoadError => e
+  ProxyRb.logger.error %(Error loading `capybara-webkit`-gem: #{e.message}. Please add `gem capybara-webkit` to your `Gemfile`)
   exit 1
 end
 

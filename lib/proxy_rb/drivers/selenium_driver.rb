@@ -1,13 +1,7 @@
 # frozen_string_literal: true
 require 'proxy_rb/drivers/basic_driver'
 require 'capybara'
-
-begin
-  require 'capybara/selenium'
-rescue LoadError
-  ProxyRb.logger.error %(Error loading `selenium`-gem. Please add `gem selenium` to your `Gemfile`)
-  exit 1
-end
+require 'selenium-webdriver'
 
 # ProxyRb
 module ProxyRb

@@ -4,8 +4,8 @@ require 'capybara'
 
 begin
   require 'capybara/poltergeist'
-rescue LoadError
-  ProxyRb.logger.error %(Error loading `poltergeist`-gem. Please add `gem poltergeist` to your `Gemfile`)
+rescue LoadError => e
+  ProxyRb.logger.error %(Error loading `poltergeist`-gem: #{e.message}. Please add `gem poltergeist` to your `Gemfile`)
   exit 1
 end
 
