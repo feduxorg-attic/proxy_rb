@@ -88,7 +88,7 @@ Feature: Choose driver to sent requests to proxy
       context 'when working proxy chain' do
         before { visit 'http://localhost:8000' }
 
-        it { expect(request).to be_successful }
+        it { expect(page).to have_content 'Example' }
       end
     end
     """
