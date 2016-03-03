@@ -72,3 +72,27 @@ Feature: Choose driver to sent requests to proxy
     And I run `http_server` in background
     When I run `rspec`
     Then the specs should all pass
+
+  Scenario: Use Selenium explicitly
+    Given a spec file named "test_spec.rb" with:
+    """
+    require 'spec_helper'
+    require 'proxy_rb/drivers/selenium_driver'
+
+    ProxyRb.configure do |config|
+      config.driver = ProxyRb::Drivers::SeleniumDriver.new
+    end
+
+    RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
+      subject { 'localhost:8080' }
+      context 'when working proxy chain' do
+        before { visit 'http://localhost:8000' }
+
+        it { expect(request).to be_successful }
+      end
+    end
+    """
+    And I run `http_proxy` in background
+    And I run `http_server` in background
+    When I run `rspec`
+    Then the specs should all pass
