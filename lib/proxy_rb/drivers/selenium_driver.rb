@@ -32,7 +32,7 @@ module ProxyRb
       end
 
       def rescuable_errors
-        [::Capybara::Selenium::TimeoutError]
+        []
       end
     end
   end
