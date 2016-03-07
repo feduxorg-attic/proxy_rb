@@ -33,3 +33,8 @@ namespace :test do
     sh 'bundle exec cucumber -p all'
   end
 end
+
+desc 'Remove files in tmp'
+task :clobber do
+  rm_rf Dir.glob(File.expand_path('../tmp/*', __FILE__))
+end
