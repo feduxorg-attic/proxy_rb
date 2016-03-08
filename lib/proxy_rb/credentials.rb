@@ -33,6 +33,17 @@ module ProxyRb
       !(user_name? && password?)
     end
 
+    # Convert to hash
+    #
+    # @return [Hash]
+    #   The credentials as hash
+    def to_hash
+      {
+        user_name: user_name,
+        password: password
+      }
+    end
+
     private
 
     def user_name?

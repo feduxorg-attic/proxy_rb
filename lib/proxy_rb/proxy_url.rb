@@ -78,5 +78,13 @@ module ProxyRb
 
       self.class.build(h)
     end
+
+    # Return url as hash
+    #
+    # @return [Hash]
+    #   the converted url
+    def to_hash
+      url.to_hash
+    end
   end
 end

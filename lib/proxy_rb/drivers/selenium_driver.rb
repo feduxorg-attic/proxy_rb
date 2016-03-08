@@ -21,6 +21,7 @@ module ProxyRb
         end
 
         profile = Selenium::WebDriver::Firefox::Profile.new
+        # profile.proxy = Selenium::WebDriver::Proxy.new(http: proxy.full_url)
         profile.proxy = Selenium::WebDriver::Proxy.new(http: format('%s:%s', proxy.host, proxy.port))
 
         unless ::Capybara.drivers.key? proxy.to_ref

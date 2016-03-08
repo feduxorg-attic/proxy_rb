@@ -42,5 +42,13 @@ module ProxyRb
     def to_ref
       Shellwords.escape(*[host, port, user].compact.join('_')).to_sym
     end
+
+    # Return proxy as full url
+    #
+    # @return [ProxyUrl]
+    #   The proxy as url
+    def full_url
+      ProxyUrl.build url.to_hash.merge(credentials.to_hash)
+    end
   end
 end
