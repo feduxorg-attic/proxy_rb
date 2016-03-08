@@ -6,6 +6,7 @@ require 'proxy_rb/http_downloader'
 require 'proxy_rb/http_proxy'
 require 'proxy_rb/request'
 require 'proxy_rb/response'
+require 'proxy_rb/errors'
 
 # Main Module
 module ProxyRb
@@ -58,8 +59,12 @@ module ProxyRb
 
           begin
             super(resource.to_url)
-          rescue *ProxyRb.config.driver.rescuable_errors
+          rescue *ProxyRb.config.driver.timeout_errors
             raise ProxyRb::UrlTimeoutError, "Failed to fetch #{resource.to_url}: Timeout occured."
+          rescue *ProxyRb.config.driver.failure_errors => e
+            raise ProxyRb::ResourceNotDownloadableError, "Failed to fetch #{resource.to_url}: #{e.message}."
+          rescue => e
+            raise ProxyRb::ResourceNotDownloadableError, "An unexpected error occured while fetching #{resource.to_url}: #{e.message}."
           end
         end
 

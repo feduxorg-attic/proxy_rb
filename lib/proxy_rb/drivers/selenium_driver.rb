@@ -2,6 +2,7 @@
 require 'proxy_rb/drivers/basic_driver'
 require 'capybara'
 require 'selenium-webdriver'
+require 'proxy_rb/errors'
 
 # ProxyRb
 module ProxyRb
@@ -31,7 +32,11 @@ module ProxyRb
         ::Capybara.current_driver = proxy.to_ref
       end
 
-      def rescuable_errors
+      def timeout_errors
+        []
+      end
+
+      def failure_errors
         []
       end
     end

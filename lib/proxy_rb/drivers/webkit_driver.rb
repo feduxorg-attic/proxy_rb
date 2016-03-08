@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'proxy_rb/drivers/basic_driver'
+require 'proxy_rb/errors'
 
 begin
   require 'capybara/webkit'
@@ -48,8 +49,16 @@ module ProxyRb
         ::Capybara.current_driver = proxy.to_ref
       end
 
-      def rescuable_errors
+      def timeout_errors
         [::Capybara::Webkit::TimeoutError]
+      end
+
+      def failure_errors
+        [
+          Capybara::Webkit::InvalidResponseError,
+          Capybara::Webkit::NoResponseError,
+          Capybara::Webkit::ConnectionError
+        ]
       end
     end
   end
