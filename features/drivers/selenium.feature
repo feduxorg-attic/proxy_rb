@@ -3,7 +3,7 @@ Feature: Choose selenium driver to sent requests to proxy
   Background:
     Given I use a fixture named "proxy-config"
     And I look for executables in "bin" within the current directory
-    And I use a simple standard proxy
+    And I use a simple proxy
     And I use a simple web server
 
   Scenario: Successful request

@@ -46,7 +46,7 @@ Given(/^I use a proxy requiring authentication$/) do
   step 'I use a proxy with the following configuration:', table(%(|option | value |))
 end
 
-Given(/^I use a simple standard proxy$/) do
+Given(/^I use a simple proxy$/) do
   step 'I use a proxy with the following configuration:', table(%(|option | value |))
 end
 

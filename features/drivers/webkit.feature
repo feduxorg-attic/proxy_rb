@@ -3,7 +3,7 @@ Feature: Choose webkit driver to sent requests to proxy
   Background:
     Given I use a fixture named "proxy-config"
     And I look for executables in "bin" within the current directory
-    And I use a simple standard proxy
+    And I use a simple proxy
     And I use a simple web server
 
   Scenario: Successful request with default configuration
@@ -62,10 +62,9 @@ Feature: Choose webkit driver to sent requests to proxy
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
       subject { 'localhost:8080' }
-      context 'when working proxy chain' do
-        before { visit 'http://localhost:8000' }
 
-        it { expect(request).to be_successful }
+      context 'when working proxy chain' do
+        it { expect{ visit 'http://localhost:8000' }.to raise_error  ProxyRb::ResourceNotDownloadableError }
       end
     end
     """
@@ -85,10 +84,9 @@ Feature: Choose webkit driver to sent requests to proxy
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
       subject { 'localhost:8080' }
-      context 'when working proxy chain' do
-        before { visit 'http://localhost:8000' }
 
-        it { expect(request).to be_successful }
+      context 'when working proxy chain' do
+        it { expect{ visit 'http://localhost:8000' }.not_to raise_error }
       end
     end
     """

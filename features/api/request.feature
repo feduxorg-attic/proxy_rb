@@ -29,8 +29,8 @@ Feature: Test if access is forbidden
 
   Scenario: Check if request is forbidden
     Given I use a web server with the following configuration:
-      | option   | value            |
-      | response | { "status": 403 } |
+       | option      | value | 
+       | status_code | 403   | 
     And I run `http_server` in background
     And a spec file named "test_spec.rb" with:
     """

@@ -1,7 +1,7 @@
-Feature: Authenticate agains proxy
+Feature: Authenticate against Proxy
 
   As a proxy administrator
-  I normally use proxy serververs which require authentication
+  I normally use proxy servers which require authentication
   To let the users get access to the www
 
   Background:
@@ -59,8 +59,7 @@ Feature: Authenticate agains proxy
     env.secrets.local
     ~~~
 
-    Given I use a proxy requiring authentication
-    And I set the environment variable "SECRET_USER1" to "*Test123"
+    Given I set the environment variable "SECRET_USER1" to "*Test123"
     And a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'

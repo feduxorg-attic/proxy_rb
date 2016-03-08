@@ -7,12 +7,12 @@ Feature: Test if access is forbidden
   Background:
     Given I use a fixture named "proxy-config"
     And I look for executables in "bin" within the current directory
-    And I use a simple standard proxy
+    And I use a simple proxy
 
   Scenario: Simple HTTP request with proxy which is redirected with 301 status code
     Given I use a web server at "bin/http_server" with the following configuration:
-      | option   | value            |
-      | response | { "status": 403 } |
+       | option      | value | 
+       | status_code | 403   | 
     And a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
