@@ -1,14 +1,5 @@
 # frozen_string_literal: true
-require 'rspec'
-require 'capybara/rspec'
-
-require 'proxy_rb'
-require 'proxy_rb/no_proxy'
-
-ProxyRb.require_files_matching_pattern('rspec/helpers/*.rb')
-ProxyRb.require_files_matching_pattern('rspec/matchers/*.rb')
-ProxyRb.require_files_matching_pattern('rspec/shared_examples/*.rb')
-ProxyRb.require_files_matching_pattern('rspec/shared_contexts/*.rb')
+require 'proxy_rb/api'
 
 # Main Module
 module ProxyRb
@@ -18,7 +9,5 @@ module ProxyRb
 end
 
 RSpec.configure do |config|
-  config.include ProxyRb::Rspec::Helpers::HttpProxy, type: :http_proxy
-  config.include ProxyRb::Rspec::Helpers::Passwords, type: :http_proxy
-  config.include Capybara::RSpecMatchers, type: :http_proxy
+  config.include ProxyRb::Api, type: :http_proxy
 end
