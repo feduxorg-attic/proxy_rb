@@ -13,8 +13,8 @@ module ProxyRb
       @page = page
     end
 
-    # def forbidden?
-    #   page.status_code == 403
-    # end
+    def mime_type
+      page.driver.response_headers['Content-Type']
+    end
   end
 end

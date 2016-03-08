@@ -31,7 +31,7 @@ module Test
       server = WEBrick::HTTPServer.new config
 
       server.mount_proc '/' do |_req, res|
-        Array(headers).each { |k, v| res.headers[k] = v }
+        Array(headers).each { |k, v| res.header[k] = v }
 
         res.body = body if body
         res.status = status_code if status_code

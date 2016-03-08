@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'contracts'
   spec.add_runtime_dependency 'excon'
 
-  spec.add_runtime_dependency 'rspec'
+  spec.add_runtime_dependency 'rspec', '~> 3.3'
 
   spec.required_ruby_version = '~> 2.3'
 end

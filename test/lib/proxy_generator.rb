@@ -10,8 +10,8 @@ module Test
 
       config = {}
       config[:body]          = data.delete(:body)
-      config[:config]        = data.delete(:config)
-      config[:headers]       = data.delete(:headers)
+      config[:config]        = data.key?(:config) ? JSON.parse(data.delete(:config).to_s) : nil
+      config[:headers]       = data.key?(:headers) ? JSON.parse(data.delete(:headers).to_s) : nil
       config[:status_code]   = data.delete(:status_code)
       config[:user_database] = data.delete(:user_database)
 
