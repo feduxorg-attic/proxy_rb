@@ -76,6 +76,10 @@ RSpec.describe 'My Proxy' do
 end
 ~~~
 
+Please have a look at the
+["features/getting_started")(features/getting_started)-directory for more
+information about that topic.
+
 ### Getting on with "proxy_rb"
 
 Please have a look at our "feature"-files found [here](features/).
@@ -90,7 +94,7 @@ detailed information.
 
 ### Driver
 
-You can choose between two drivers to sent your requests: "Poltergeist" and
+You can choose between three drivers to sent your requests: "Selenium", "Poltergeist" and
 "Webkit". Please have a look at
 ["features/drivers.feature"](features/drivers.feature) for detailed
 information.
