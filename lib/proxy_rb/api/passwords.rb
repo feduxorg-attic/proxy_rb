@@ -3,7 +3,7 @@ require 'contracts'
 
 # ProxyRb
 module ProxyRb
-  # Helpers
+  # Api
   module Api
     # Helpers to access passwords
     module Passwords

@@ -10,7 +10,7 @@ require 'proxy_rb/errors'
 
 # Main Module
 module ProxyRb
-  # Api Module
+  # Api
   module Api
     # Non includable internal helper methods
     #

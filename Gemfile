@@ -23,7 +23,7 @@ group :development, :test do
   # Set env during development/test
   gem 'dotenv'
 
-  gem 'aruba', require: false
+  gem 'aruba', '~> 0.14.0', require: false
   gem 'awesome_print', require: 'ap'
   gem 'bundler', '~> 1.3', require: false
   gem 'command_exec', require: false
