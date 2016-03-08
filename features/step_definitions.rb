@@ -92,3 +92,8 @@ Given(/^the following local users are authorized to use the (?:proxy|webserver):
 
   htpasswd.flush
 end
+
+Then(/^the "([^"]*)"\-gem should be installed on the local system$/) do |name|
+  run("gem list #{name}")
+  expect(last_command_started).to have_output(/#{name}/)
+end
