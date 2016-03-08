@@ -18,11 +18,12 @@ module Test
 
     # Start server
     def start
+      require 'webrick'
       require 'webrick/httpproxy'
 
       if user_database && File.file?(user_database)
         # Apache compatible Password manager
-        htpasswd = WEBrick::HTTPAuth::Htpasswd.new File.expand_path('../../config/htpasswd', __FILE__)
+        htpasswd = WEBrick::HTTPAuth::Htpasswd.new user_database
 
         # Authenticator
         authenticator = WEBrick::HTTPAuth::ProxyBasicAuth.new(

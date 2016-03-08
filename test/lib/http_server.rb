@@ -22,7 +22,7 @@ module Test
 
       if user_database && File.file?(user_database)
         # Apache compatible Password manager
-        htpasswd = WEBrick::HTTPAuth::Htpasswd.new File.expand_path('../../config/htpasswd', __FILE__)
+        htpasswd = WEBrick::HTTPAuth::Htpasswd.new user_database
 
         config[:Realm]  = 'Web Server Realm'
         config[:UserDB] = htpasswd
