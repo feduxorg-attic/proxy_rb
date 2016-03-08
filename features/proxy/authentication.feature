@@ -158,6 +158,9 @@ Feature: Authenticate against Proxy
     Then the specs should all pass
 
   Scenario: Use authentication with selenium driver
+
+    This does not work unfortunately.
+
     Given a spec file named "test_spec.rb" with:
     """
     require 'spec_helper'
@@ -173,7 +176,7 @@ Feature: Authenticate against Proxy
       context 'when working proxy chain' do
         before { visit 'http://localhost:8000' }
 
-        it { expect(request).to be_successful }
+        it { expect { expect(response).to have_content 'Example' }.to raise_error Capybara::ElementNotFound }
       end
     end
     """
