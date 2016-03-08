@@ -9,12 +9,16 @@ module Test
       data = hashes.each_with_object({}) { |e, a| a[e[:option].to_sym] = e[:value] }
 
       config = {}
-      config[:headers]       = data[:headers]
-      config[:body]          = data.fetch(:body, 'Example Domain')
-      config[:status_code]   = data[:status_code]
-      config[:config]        = data[:config]
-      config[:user_database] = data[:user_database]
+      config[:body]          = data.delete(:body)
+      config[:config]        = data.delete(:config)
+      config[:headers]       = data.delete(:headers)
+      config[:status_code]   = data.delete(:status_code)
+      config[:user_database] = data.delete(:user_database)
 
+      # Merge the rest
+      config.merge! data
+
+      # Compact hash
       config.delete_if { |k,v| v.nil? }
 
       <<~EOS
