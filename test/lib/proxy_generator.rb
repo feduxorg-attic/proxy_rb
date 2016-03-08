@@ -19,7 +19,7 @@ module Test
       config.merge! data
 
       # Compact hash
-      config.delete_if { |k,v| v.nil? }
+      config.delete_if { |_k, v| v.nil? }
 
       <<~EOS
       #!/usr/bin/env ruby
