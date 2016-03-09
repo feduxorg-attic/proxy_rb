@@ -38,7 +38,7 @@ group :development, :test do
   gem 'launchy', require: false
   gem 'license_finder'
   gem 'rack'
-  gem 'rake', require: false
+  gem 'rake', '~> 10.0', require: false
   gem 'rubocop', require: false
   gem 'simplecov', require: false
   gem 'sinatra', require: 'sinatra/base'
