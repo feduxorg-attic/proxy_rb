@@ -10,21 +10,12 @@ After do
   terminate_all_commands
 end
 
-# Given(/^I append "(.*)" to the environment variable "(.*)"/) do |variable, value|
-#   append_environment_variable(variable.to_s, value.to_s)
-# end
-#
-# Given(/^I look for executables in "(.*)" within the current directory$/) do |directory|
-#   prepend_environment_variable 'PATH', expand_path(directory) + ':'
-# end
+Given(/^I use a simple web server$/) do |path|
+  step 'I use a web server with the following configuration:' , table(%(|option | value |))
+end
 
-Given(/^I use a simple web server(?: at "(.*)")?$/) do |path|
-  name = if path
-           %(I use a web server at "#{path}" with the following configuration:)
-         else
-           'I use a web server with the following configuration:'
-         end
-  step name, table(%(|option | value |))
+Given(/^I use a simple web server requiring authentication$/) do
+  step 'I use a web server with the following configuration:' , table(%(|option | value |))
 end
 
 Given(/^I use a web server(?: at "(.*)")? with the following configuration:/) do |path, table|
