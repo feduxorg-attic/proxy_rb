@@ -67,7 +67,7 @@ Feature: Choose selenium driver to sent requests to proxy
     And I run `http_proxy` in background
     And I run `http_proxy_2` in background
     And I run `http_server` in background
-    When I run `rspec`
+    When I successfully run `rspec`
     Then the specs should all pass
 
   Scenario: Proxy is not reachable
