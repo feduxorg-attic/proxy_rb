@@ -10,7 +10,7 @@ After do
   terminate_all_commands
 end
 
-Given(/^I use a simple web server$/) do |path|
+Given(/^I use a simple web server$/) do
   step 'I use a web server with the following configuration:' , table(%(|option | value |))
 end
 
