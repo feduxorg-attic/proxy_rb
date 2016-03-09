@@ -157,9 +157,11 @@ Feature: Authenticate against Proxy
     When I run `rspec`
     Then the specs should all pass
 
+  @broken-external
   Scenario: Use authentication with selenium driver
 
-    This does not work unfortunately.
+    This does not work unfortunately because of problems with selenium and
+    firefox.
 
     Given a spec file named "test_spec.rb" with:
     """
