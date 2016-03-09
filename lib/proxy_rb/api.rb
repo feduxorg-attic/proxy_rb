@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rspec/matchers'
 require 'capybara/rspec'
 
@@ -6,7 +7,9 @@ require 'proxy_rb/main'
 ProxyRb.require_files_matching_pattern('api/*.rb')
 ProxyRb.require_files_matching_pattern('matchers/*.rb')
 
+# ProxyRb
 module ProxyRb
+  # Api
   module Api
     include ProxyRb::Api::HttpProxy
     include ProxyRb::Api::Passwords

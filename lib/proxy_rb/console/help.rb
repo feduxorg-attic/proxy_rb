@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'proxy_rb/api'
 
 # ProxyRb
@@ -18,14 +19,7 @@ module ProxyRb
 
       # List available methods in proxy_rb
       def proxy_rb_methods
-        ms = if RUBY_VERSION < '1.9'
-               # rubocop:disable Style/EachWithObject
-               (ProxyRb::Api.instance_methods - Module.instance_methods).inject([]) { |a, e| a << format("* %s", e); a }.sort
-               # rubocop:enable Style/EachWithObject
-             else
-               (ProxyRb::Api.instance_methods - Module.instance_methods).each_with_object([]) { |e, a| a << format("* %s", e) }.sort
-             end
-
+        ms = (ProxyRb::Api.instance_methods - Module.instance_methods).each_with_object([]) { |e, a| a << format('* %s', e) }.sort
         puts "Available Methods:\n" + ms.join("\n")
 
         nil

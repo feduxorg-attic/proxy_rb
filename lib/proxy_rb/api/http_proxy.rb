@@ -19,10 +19,10 @@ module ProxyRb
       class << self
         def clear_environment
           %w(
-              http_proxy
-              https_proxy
-              HTTP_PROXY
-              HTTPS_PROXY
+            http_proxy
+            https_proxy
+            HTTP_PROXY
+            HTTPS_PROXY
           ).each { |v| ENV.delete v }
         end
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'thor/group'
 require 'thor/actions'
 
@@ -49,7 +50,7 @@ module ProxyRb
         end
 
         def start(*)
-          fail ArgumentError, %(Unknown test framework. Please use "rspec" )
+          raise ArgumentError, %(Unknown test framework. Please use "rspec" )
         end
       end
     end
