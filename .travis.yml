@@ -18,4 +18,4 @@ before_script:
 addons:
   apt:
     packages:
-      -  libwebkit-dev
+      - libqt5webkit5-dev
