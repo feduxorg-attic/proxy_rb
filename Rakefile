@@ -20,8 +20,9 @@ desc 'Test with coveralls'
 task coveralls: %w(test coveralls:push)
 
 namespace :test do
-  require 'rubocop/rake_task'
-  RuboCop::RakeTask.new
+  task :rubocop do
+    sh 'rubocop'
+  end
 
   desc 'Run rspec'
   task :rspec do

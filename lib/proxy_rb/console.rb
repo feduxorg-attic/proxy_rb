@@ -9,8 +9,6 @@ module ProxyRb
   # Consule
   class Console
     # Start the proxy_rb console
-    #
-    # rubocop:disable Metrics/MethodLength
     def start
       # Start IRB with current context:
       # http://stackoverflow.com/questions/4189818/how-to-run-irb-start-in-context-of-current-class
@@ -36,7 +34,6 @@ module ProxyRb
       IRB.conf[:SAVE_HISTORY] = 1000
       IRB.conf[:HISTORY_FILE] = ProxyRb.config.console_history_file
 
-      # rubocop:disable Lint/NestedMethodDefinition
       context = Class.new do
         include ProxyRb::Console::Help
         include ProxyRb::Api
@@ -45,7 +42,6 @@ module ProxyRb
           'nil'
         end
       end
-      # rubocop:enable Lint/NestedMethodDefinition
 
       irb = IRB::Irb.new(IRB::WorkSpace.new(context.new))
       IRB.conf[:MAIN_CONTEXT] = irb.context
@@ -62,6 +58,5 @@ module ProxyRb
         IRB.irb_at_exit
       end
     end
-    # rubocop:enable Metrics/MethodLength
   end
 end
