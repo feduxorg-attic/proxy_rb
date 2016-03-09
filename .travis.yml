@@ -11,7 +11,7 @@ rvm:
 script: bin/test
 before_install:
   - curl -o /tmp/vault.zip https://releases.hashicorp.com/vault/0.5.1/vault_0.5.1_linux_amd64.zip
-  - unzip /tmp/vault.zip
+  - unzip /tmp/vault.zip -d /tmp/
   - install -D -m 0755 /tmp/vault ./bin/vault
 before_script:
   - 'export DISPLAY=:99.0'
