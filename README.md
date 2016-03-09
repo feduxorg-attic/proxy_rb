@@ -132,3 +132,10 @@ release a new version, update the version number in `version.rb`, and then run
 `bundle exec rake gem:release` to create a git tag for the version, push git
 commits and tags, and push the `.gem` file to
 [rubygems.org](https://rubygems.org).
+
+## Caveats
+
+* Authentication against a proxy using BASIC-scheme works fine for `Poltergeist` and `Webkit`-drivers. It fails for `Selenium` as you cannot pass username and password to the browser
+* Authentication agains a proxy using NEGOTIATE (Kerberos) and NTLM-scheme fails for `Poltergeist` and `Webkit`-drivers due to problems with Qt which is used by both projects
+
+
