@@ -4,8 +4,6 @@ env:
 language: ruby
 bundler_args: --without development debug profile
 rvm:
-  - 2.1.8
-  - 2.2.4
   - 2.3.0
   - ruby-head
 script: bin/test
