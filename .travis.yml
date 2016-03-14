@@ -19,3 +19,6 @@ addons:
   apt:
     packages:
       - libqtwebkit-dev
+matrix:
+  allow_failures:
+  - rvm: ruby-head
