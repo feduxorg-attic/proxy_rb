@@ -77,7 +77,7 @@ end
 ~~~
 
 Please have a look at the
-["features/getting_started")(features/getting_started)-directory for more
+["features/getting_started"](features/getting_started)-directory for more
 information about that topic.
 
 ### Getting on with "proxy_rb"
@@ -89,14 +89,14 @@ Please have a look at our "feature"-files found [here](features/).
 Maybe your proxy servers require authentication and you would like to test this
 as well. You've got several possibilies to use proxy passwords with `proxy_rb`.
 Please have a look at
-["features/authentication.feature"](features/authentication.feature) for
+["features/authentication.feature"](features/proxy/authentication.feature) for
 detailed information.
 
 ### Driver
 
 You can choose between three drivers to sent your requests: "Selenium", "Poltergeist" and
 "Webkit". Please have a look at
-["features/drivers.feature"](features/drivers.feature) for detailed
+["features/drivers"](features/drivers) for detailed
 information.
 
 ## Development
