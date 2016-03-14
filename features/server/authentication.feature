@@ -11,14 +11,14 @@ Feature: Authenticate against web server
     And I use a web server requiring authentication
     And I run `http_proxy` in background
     And I run `http_server` in background
-    And the following local users are authorized to use the webserver:
+    And the following local users are authorized to use the web server:
       | user  | password |
       | user1 | *Test123 |
 
   Scenario: Set authentication in URL (not recommended)
 
     This is the least secure option to set the password for authentication
-    againts a webserver. It's not recommended to use this.
+    againts a web server. It's not recommended to use this.
 
     Given a spec file named "test_spec.rb" with:
     """

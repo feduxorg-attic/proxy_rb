@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'vault'
 require 'json'
+require 'webrick/httpauth/htpasswd'
 
 Given(/^a spec file named "([^"]*)" with:$/) do |path, content|
   step %(a file named "#{File.join('spec', path)}" with:), content
@@ -26,7 +27,7 @@ Given(/^I use a web server(?: at "(.*)")? with the following configuration:/) do
   hashes = [
     {
       option: 'user_database',
-      value: expand_path('config/htpasswd')
+      value: expand_path('config/htpasswd.web_server')
     }
   ].concat table.hashes
 
@@ -49,7 +50,7 @@ Given(/^I use a proxy(?: at "(.*)")? with the following configuration:$/) do |pa
   hashes = [
     {
       option: 'user_database',
-      value: expand_path('config/htpasswd')
+      value: expand_path('config/htpasswd.proxy')
     }
   ].concat table.hashes
 
@@ -68,10 +69,16 @@ Given(/^I use a local vault server with the following data at "(.*)":$/) do |mou
   end
 end
 
-Given(/^the following local users are authorized to use the (?:proxy|webserver):$/) do |table|
-  require 'webrick/httpauth/htpasswd'
+Given(/^the following local users are authorized to use the (proxy|web server):$/) do |type, table|
   create_directory('config')
-  htpasswd = WEBrick::HTTPAuth::Htpasswd.new expand_path('config/htpasswd')
+
+  htpasswd = if type == 'proxy'
+               WEBrick::HTTPAuth::Htpasswd.new expand_path('config/htpasswd.proxy')
+             elsif type == 'web server'
+               WEBrick::HTTPAuth::Htpasswd.new expand_path('config/htpasswd.web_server')
+             else
+               raise ArgumentError, 'Only "proxy" and "web server" are allowed'
+             end
 
   table.hashes.each do |row|
     user     = row['user'].to_s
