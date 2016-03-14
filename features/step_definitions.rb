@@ -14,7 +14,7 @@ Given(/^I use a simple web server$/) do
   step 'I use a web server with the following configuration:', table(%(|option | value |))
 end
 
-Given(/^I use a simple web server requiring authentication$/) do
+Given(/^I use a web server requiring authentication$/) do
   step 'I use a web server with the following configuration:', table(%(|option | value |))
 end
 
