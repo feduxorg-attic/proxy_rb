@@ -42,21 +42,27 @@ Feature: Authenticate against Proxy
     You can either set the environment variable with some script or you use
     [`dotenv`](https://github.com/bkeepers/dotenv) et al to set the variables.
 
-    *Example: <project_root>/env.secrets.local*
+    *Example: <project_root>/.env.secrets.local*
+
+    First add `dotenv` to your `Gemfile`.
+
+    ~~~ruby
+    gem 'dotenv'
+    ~~~
 
     You can add the following snippet to your `spec/spec_helper.rb`-file to
     make `dotenv` load your secrets into the enviroment.
 
     ~~~ruby
     require 'dotenv'
-    Dotenv.load File.expand_path('../../env.secrets.local', __FILE__)
+    Dotenv.load File.expand_path('../../.env.secrets.local', __FILE__)
     ~~~
 
     Now make sure, that you add this pattern to your `.gitignore`-file to make
     sure, the file is not part of the repository.
 
     ~~~ini
-    env.secrets.local
+    .env.secrets.local
     ~~~
 
     Given I set the environment variable "SECRET_USER1" to "*Test123"
