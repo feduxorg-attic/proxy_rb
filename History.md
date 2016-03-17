@@ -8,6 +8,7 @@
 * Made test suite succeed on travis.org
 * Added announcer known from `aruba`. Now one output information about
   configured user, proxy and resource
+* Addd new matchers to output better error messages
 
 # RELEASED
 
