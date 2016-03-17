@@ -5,4 +5,13 @@ module ProxyRb
 
   # Raised when resource cannot be downloaded
   class ResourceNotDownloadableError < StandardError; end
+
+  # Raised if one tries to use an unknown configuration option
+  class UnknownOptionError < ArgumentError; end
+
+  # Raised if an event name cannot be resolved
+  class EventNameResolveError < StandardError; end
+
+  # Raised if given object is not an event
+  class NoEventError < StandardError; end
 end

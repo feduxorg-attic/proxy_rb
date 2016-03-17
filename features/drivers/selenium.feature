@@ -30,6 +30,7 @@ Feature: Choose selenium driver to sent requests to proxy
     When I run `rspec`
     Then the specs should all pass
 
+  @broken
   Scenario: Successful request with two differenct proxy servers
     Given I use a proxy at "bin/http_proxy" with the following configuration:
       | option | value |

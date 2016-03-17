@@ -11,6 +11,7 @@ ProxyRb.require_files_matching_pattern('matchers/*.rb')
 module ProxyRb
   # Api
   module Api
+    include ProxyRb::Api::Core
     include ProxyRb::Api::HttpProxy
     include ProxyRb::Api::Passwords
     include Capybara::RSpecMatchers

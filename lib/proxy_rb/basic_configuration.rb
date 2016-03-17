@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'contracts'
 require 'proxy_rb/basic_configuration/option'
-require 'proxy_rb/basic_configuration/in_config_wrapper'
+require 'proxy_rb/basic_configuration/in_configuration_wrapper'
 
 # ProxyRb
 module ProxyRb
@@ -35,7 +35,7 @@ module ProxyRb
         raise ArgumentError, 'contract-options is required' if contract.nil?
 
         Contract contract
-        add_option(name, block_given? ? yield(InConfigWrapper.new(known_options)) : default)
+        add_option(name, block_given? ? yield(InConfigurationWrapper.new(known_options)) : default)
 
         define_method(name) { find_option(name).value }
 

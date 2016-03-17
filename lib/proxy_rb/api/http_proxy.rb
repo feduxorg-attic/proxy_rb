@@ -48,23 +48,32 @@ module ProxyRb
       # Visit an URL
       #
       # @param [String] url
+      # rubocop:disable Metrics/AbcSize
       def visit(url)
         resource = Resource.new(url)
 
+        proxy_rb.event_bus.notify Events::ResourceSet.new(resource.url.to_s)
+        proxy_rb.event_bus.notify Events::ResourceUserSet.new(resource.credentials.to_s) unless resource.credentials.empty?
+
         NonIncludes.clear_environment
         NonIncludes.configure_driver
+
+        proxy_rb.event_bus.notify Events::ProxySet.new(proxy.url.to_s)
+        proxy_rb.event_bus.notify Events::ProxyUserSet.new(proxy.credentials.to_s) unless proxy.credentials.empty?
+
         NonIncludes.register_capybara_driver_for_proxy(proxy)
 
         begin
-          super(resource.to_url)
+          super(resource.to_s)
         rescue *ProxyRb.config.driver.timeout_errors
-          raise ProxyRb::UrlTimeoutError, "Failed to fetch #{resource.to_url}: Timeout occured."
+          raise ProxyRb::UrlTimeoutError, "Failed to fetch #{resource}: Timeout occured."
         rescue *ProxyRb.config.driver.failure_errors => e
-          raise ProxyRb::ResourceNotDownloadableError, "Failed to fetch #{resource.to_url}: #{e.message}."
+          raise ProxyRb::ResourceNotDownloadableError, "Failed to fetch #{resource}: #{e.message}."
         rescue => e
-          raise ProxyRb::ResourceNotDownloadableError, "An unexpected error occured while fetching #{resource.to_url}: #{e.message}."
+          raise ProxyRb::ResourceNotDownloadableError, "An unexpected error occured while fetching #{resource}: #{e.message}."
         end
       end
+      # rubocop:enable Metrics/AbcSize
 
       # !@method download
       #

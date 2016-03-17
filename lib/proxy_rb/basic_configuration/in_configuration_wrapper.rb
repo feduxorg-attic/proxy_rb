@@ -9,7 +9,7 @@ module ProxyRb
     # configuration option from with `ProxyRb::Config`.
     #
     # @private
-    class InConfigWrapper
+    class InConfigurationWrapper
       attr_reader :config
       private :config
 

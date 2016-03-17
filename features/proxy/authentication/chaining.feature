@@ -23,6 +23,7 @@ Feature: Chaining multiple fetchers to Authenticate against Proxy
     """
     require 'spec_helper'
     require 'proxy_rb/password_fetchers/vault_password_fetcher'
+    require 'proxy_rb/password_fetchers/chaining_password_fetcher'
     require 'uri'
 
     ProxyRb.configure do |config|

@@ -3,7 +3,6 @@ require 'contracts'
 
 require 'proxy_rb/version'
 require 'proxy_rb/basic_configuration'
-require 'proxy_rb/basic_configuration/in_config_wrapper'
 
 require 'proxy_rb/password_fetchers/basic_password_fetcher'
 require 'proxy_rb/password_fetchers/environment_password_fetcher'

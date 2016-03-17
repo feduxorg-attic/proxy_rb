@@ -6,7 +6,7 @@ RSpec.describe Resource do
   subject(:resource) { described_class.new url }
   let(:url) { 'http://example.com' }
 
-  describe '#to_url' do
-    it { expect(resource.to_url).to eq url }
+  describe '#to_s' do
+    it { expect(resource.to_s).to eq url }
   end
 end

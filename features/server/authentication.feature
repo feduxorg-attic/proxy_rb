@@ -177,7 +177,7 @@ Feature: Authenticate against web server
       context 'when working proxy chain' do
         before { visit 'http://user1:*Test123@localhost:8000' }
 
-        it { expect(request).to be_successful }
+        it { expect(page).to have_content 'Example' }
       end
     end
     """
