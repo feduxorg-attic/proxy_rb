@@ -89,8 +89,8 @@ Please have a look at our "feature"-files found [here](features/).
 Maybe your proxy servers require authentication and you would like to test this
 as well. You've got several possibilies to use proxy passwords with `proxy_rb`.
 Please have a look at
-["features/proxy/authentication.feature"](features/proxy/authentication.feature) for
-detailed information.
+["features/proxy/authentication"](features/proxy/authentication) and
+["features/api/password"](features/api/password) for detailed information.
 
 ### Driver
 

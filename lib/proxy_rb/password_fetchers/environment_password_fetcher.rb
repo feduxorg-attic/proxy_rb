@@ -26,8 +26,14 @@ module ProxyRb
       Contract String => String
       def call(user_name)
         UserPasswords::EnvironmentUserPassword.new(
-          ENV[format('%s_%s', prefix, user_name.upcase)]
+          fetch_password_for_user(user_name)
         ).to_s
+      end
+
+      private
+
+      def read(string)
+        ENV[format('%s_%s', prefix, string)]
       end
     end
   end

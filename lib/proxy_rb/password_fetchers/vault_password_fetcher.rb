@@ -38,9 +38,15 @@ module ProxyRb
       def call(user_name)
         client.with_retries(::Vault::HTTPConnectionError, ::Vault::HTTPError) do |_attempt, _e|
           UserPasswords::VaultUserPassword.new(
-            ::Vault.logical.read(File.join(prefix, user_name))
+            fetch_password_for_user(user_name)
           ).to_s
         end
+      end
+
+      private
+
+      def read(string)
+        ::Vault.logical.read(File.join(prefix, string))
       end
     end
   end
