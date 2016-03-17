@@ -6,6 +6,8 @@
 * Improved documentation
 * Improved test suite
 * Made test suite succeed on travis.org
+* Added announcer known from `aruba`. Now one output information about
+  configured user, proxy and resource
 
 # RELEASED
 
