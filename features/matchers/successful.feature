@@ -95,3 +95,55 @@ Feature: Check if request is successful
     """
     expected that response does not have status code 2xx
     """
+
+  Scenario: When server/proxy returns nil or zero as HTTP status code (strict mode)
+    Given I use a web server with the following configuration:
+       | option      | value |
+       | status_code | 0   |
+    And a spec file named "test_spec.rb" with:
+    """
+    require 'spec_helper'
+
+    ProxyRb.configure do |config|
+      config.strict = true # default value, only set for demonstration purposes
+    end
+
+    RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
+      subject { NoProxy }
+        context 'no proxy' do
+        before { visit 'http://localhost:8000' }
+
+        it { expect(request).not_to be_successful }
+      end
+    end
+    """
+    And I run `http_server` in background
+    When I run `rspec`
+    Then the specs should all pass
+
+
+  Scenario: When server/proxy returns nil or zero as HTTP status code (non-strict mode)
+    Given I use a web server with the following configuration:
+       | option      | value |
+       | status_code | 0   |
+    And a spec file named "test_spec.rb" with:
+    """
+    require 'spec_helper'
+
+    ProxyRb.configure do |config|
+      config.strict = false
+    end
+
+    RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
+      subject { NoProxy }
+        context 'no proxy' do
+        before { visit 'http://localhost:8000' }
+
+        it { expect(request).to be_successful }
+      end
+    end
+    """
+    And I run `http_server` in background
+    When I run `rspec`
+    Then the specs should all pass
+

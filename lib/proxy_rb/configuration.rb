@@ -18,6 +18,7 @@ module ProxyRb
     option_accessor :password_fetcher, contract: { PasswordFetchers::BasicPasswordFetcher => PasswordFetchers::BasicPasswordFetcher }, default: ProxyRb::PasswordFetchers::EnvironmentPasswordFetcher.new(prefix: 'SECRET')
     option_accessor :driver, contract: { Drivers::BasicDriver => Drivers::BasicDriver }, default: ProxyRb::Drivers::WebkitDriver.new
     option_accessor :console_history_file, contract: { String => String }, default: '~/.proxy_rb_history'
+    option_accessor :strict, contract: { Bool => Bool }, default: true
   end
 end
 
