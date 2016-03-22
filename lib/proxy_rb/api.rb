@@ -14,6 +14,7 @@ module ProxyRb
     include ProxyRb::Api::Core
     include ProxyRb::Api::HttpProxy
     include ProxyRb::Api::Passwords
+    include ProxyRb::Api::Formatters
     include Capybara::RSpecMatchers
   end
 end

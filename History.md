@@ -4,6 +4,10 @@ Empty
 
 # RELEASED
 
+## [v0.7.0](https://github.com/cucumber/aruba/compare/v0.6.0...v0.7.0)
+
+* Make simple_table-formatter available as method
+
 ## [v0.6.0](https://github.com/cucumber/aruba/compare/v0.5.0...v0.6.0)
 
 * Added announcer for response headers
