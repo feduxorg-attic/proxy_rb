@@ -24,6 +24,13 @@ RSpec.describe ProxyRb::SimpleTable do
     it { expect(table.to_s).to eq rows.join("\n") }
   end
 
+  context 'when nil' do
+    let(:hash) { nil }
+    let(:rows) { [] }
+
+    it { expect(table.to_s).to eq rows.join("\n") }
+  end
+
   context 'when unsorted values' do
     context 'when using defaults' do
       let(:hash) do

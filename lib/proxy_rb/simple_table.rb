@@ -13,7 +13,7 @@ module ProxyRb
     # @param [Hash] hash
     #   Input
     def initialize(hash, opts = {})
-      @hash = hash
+      @hash = Hash(hash)
       @opts = {
         :sort => true
       }.merge opts
