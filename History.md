@@ -1,5 +1,13 @@
 #  UNRELEASED
 
+Empty
+
+# RELEASED
+
+## [v0.6.0](https://github.com/cucumber/aruba/compare/v0.5.0...v0.6.0)
+
+* Added announcer for response headers
+
 ## [v0.5.0](https://github.com/cucumber/aruba/compare/v0.4.0...v0.5.0)
 
 * Added initializer to bootstrap `proxy_prb`
@@ -10,7 +18,6 @@
   configured user, proxy and resource
 * Addd new matchers to output better error messages
 
-# RELEASED
 
 ## [v0.4.0](https://github.com/cucumber/aruba/compare/v0.1.0...v0.4.0)
 

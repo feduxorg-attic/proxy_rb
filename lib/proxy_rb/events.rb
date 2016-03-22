@@ -30,5 +30,11 @@ module ProxyRb
 
     # The configuration was changed
     class ChangedConfiguration < BasicEvent; end
+
+    # Before the resource was fetched
+    class BeforeResourceFetched < BasicEvent; end
+
+    # After the resource was fetched
+    class AfterResourceFetched < BasicEvent; end
   end
 end

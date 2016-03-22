@@ -32,12 +32,14 @@ RSpec.configure do |config|
     proxy_rb.announcer.activate(:proxy_user) if example.metadata[:announce_proxy_user]
     proxy_rb.announcer.activate(:resource) if example.metadata[:announce_resource]
     proxy_rb.announcer.activate(:resource_user) if example.metadata[:announce_resource_user]
+    proxy_rb.announcer.activate(:http_response_headers) if example.metadata[:announce_http_response_headers]
 
     if example.metadata[:announce]
       proxy_rb.announcer.activate(:proxy)
       proxy_rb.announcer.activate(:proxy_user)
       proxy_rb.announcer.activate(:resource)
       proxy_rb.announcer.activate(:resource_user)
+      proxy_rb.announcer.activate(:http_response_headers)
     end
   end
 end

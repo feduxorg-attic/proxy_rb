@@ -7,6 +7,7 @@ require 'proxy_rb/http_proxy'
 require 'proxy_rb/request'
 require 'proxy_rb/response'
 require 'proxy_rb/errors'
+require 'proxy_rb/http_headers'
 
 # Main Module
 module ProxyRb
@@ -63,6 +64,8 @@ module ProxyRb
 
         NonIncludes.register_capybara_driver_for_proxy(proxy)
 
+        proxy_rb.event_bus.notify Events::BeforeResourceFetched.new(page)
+
         begin
           super(resource.to_s)
         rescue *ProxyRb.config.driver.timeout_errors
@@ -72,6 +75,8 @@ module ProxyRb
         rescue => e
           raise ProxyRb::ResourceNotDownloadableError, "An unexpected error occured while fetching #{resource}: #{e.message}."
         end
+
+        proxy_rb.event_bus.notify Events::AfterResourceFetched.new(page)
       end
       # rubocop:enable Metrics/AbcSize
 

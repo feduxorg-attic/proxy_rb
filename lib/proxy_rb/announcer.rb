@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'shellwords'
 require 'proxy_rb/colorizer'
+require 'proxy_rb/simple_table'
 
 ProxyRb::AnsiColor.coloring = false if !STDOUT.tty? && !ENV.key?('AUTOTEST')
 
@@ -77,6 +78,7 @@ module ProxyRb
       output_format :proxy_user, proc { |v| format('Proxy User: %s', v) }
       output_format :resource_user, proc { |v| format('Resource User: %s', v) }
       output_format :resource, proc { |v| format('Resource: %s', v) }
+      output_format :http_response_headers, proc { |v| format("<<-HTTP_RESPONSE_HEADERS\n%s\nHTTP_RESPONSE_HEADERS", SimpleTable.new(v)) }
     end
 
     def output_format(channel, string = '%s', &block)

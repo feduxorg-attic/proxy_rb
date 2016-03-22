@@ -54,6 +54,13 @@ module ProxyRb
           runtime.announcer.announce :resource_user, event.entity
         end
       )
+
+      runtime.event_bus.register(
+        :after_resource_fetched,
+        proc do |event|
+          runtime.announcer.announce :http_response_headers, event.entity.driver.response_headers
+        end
+      )
     end
     # enable Metrics/MethodLength
   end
