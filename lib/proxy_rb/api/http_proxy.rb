@@ -7,7 +7,6 @@ require 'proxy_rb/http_proxy'
 require 'proxy_rb/request'
 require 'proxy_rb/response'
 require 'proxy_rb/errors'
-require 'proxy_rb/http_headers'
 
 # Main Module
 module ProxyRb
