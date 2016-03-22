@@ -146,4 +146,3 @@ Feature: Check if request is forbidden
     And I run `http_server` in background
     When I run `rspec`
     Then the specs should all pass
-

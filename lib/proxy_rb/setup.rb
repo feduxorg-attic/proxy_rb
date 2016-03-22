@@ -17,6 +17,8 @@ module ProxyRb
       return if runtime.setup_already_done?
 
       events
+      activate_announcer_channels
+      output_warnings
 
       runtime.setup_done
 
@@ -24,6 +26,14 @@ module ProxyRb
     end
 
     private
+
+    def activate_announcer_channels
+      runtime.announcer.activate :warnings
+    end
+
+    def output_warnings
+      runtime.announcer.announce :warnings, 'You disabled the "strict"-mode in your ProxyRb-configuration. You might not notice all errors.' if runtime.config.strict == false
+    end
 
     # disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize

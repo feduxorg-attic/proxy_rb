@@ -74,6 +74,7 @@ module ProxyRb
     private
 
     def after_init
+      output_format :warnings, proc { |v| format('WARNING: %s', v) }
       output_format :proxy, proc { |v| format('Proxy: %s', v) }
       output_format :proxy_user, proc { |v| format('Proxy User: %s', v) }
       output_format :resource_user, proc { |v| format('Resource User: %s', v) }
