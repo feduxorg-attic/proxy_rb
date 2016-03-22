@@ -11,6 +11,11 @@ end
 RSpec.configure do |config|
   config.include ProxyRb::Api, type: :http_proxy
 
+  # Output warnings
+  config.before :suite do
+    ProxyRb.logger.warn 'You disabled the "strict"-mode in your ProxyRb-configuration. You might not notice all errors.' if ProxyRb.config.strict == false
+  end
+
   # Setup ProxyRb
   config.before :each do |_example|
     next unless self.class.include? ProxyRb::Api
