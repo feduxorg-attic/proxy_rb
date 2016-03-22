@@ -4,6 +4,11 @@ Empty
 
 # RELEASED
 
+## [v0.8.1](https://github.com/cucumber/aruba/compare/v0.8.0...v0.8.1)
+
+* Handle drivers - like `capybara-selenium` which currently not support
+  `#response_headers` on `page.driver.response_headers`.
+
 ## [v0.8.0](https://github.com/cucumber/aruba/compare/v0.7.1...v0.8.0)
 
 * Introduce `strict` option to make it possible to be more relaxed in matchers
