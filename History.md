@@ -4,6 +4,11 @@ Empty
 
 # RELEASED
 
+## [v0.8.0](https://github.com/cucumber/aruba/compare/v0.7.1...v0.8.0)
+
+* Introduce `strict` option to make it possible to be more relaxed in matchers
+  when the response is not readable, this can lead to status_code == 0
+
 ## [v0.7.1](https://github.com/cucumber/aruba/compare/v0.7.0...v0.7.1)
 
 * Handle nil as input for `#simple_table`

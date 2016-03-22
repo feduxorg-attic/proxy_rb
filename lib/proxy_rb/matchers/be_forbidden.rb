@@ -3,8 +3,6 @@ RSpec::Matchers.define :be_forbidden do
   match do |actual|
     next true if proxy_rb.config.strict == false && (actual.status_code.nil? || actual.status_code == 0)
     require 'pry'
-    binding.pry
-
     sleep 0.5 # handle network latency
 
     values_match?(403, actual.status_code)

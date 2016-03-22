@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 require 'proxy_rb/simple_table'
 
@@ -8,8 +9,8 @@ RSpec.describe ProxyRb::SimpleTable do
   context 'when valid hash' do
     let(:hash) do
       {
-        :key1 => 'value',
-        :key2 => 'value'
+        key1: 'value',
+        key2: 'value'
       }
     end
     let(:rows) { ['# key1 => value', '# key2 => value'] }
@@ -35,8 +36,8 @@ RSpec.describe ProxyRb::SimpleTable do
     context 'when using defaults' do
       let(:hash) do
         {
-          :key2 => 'value',
-          :key1 => 'value'
+          key2: 'value',
+          key1: 'value'
         }
       end
 
@@ -54,8 +55,8 @@ RSpec.describe ProxyRb::SimpleTable do
 
       let(:hash) do
         {
-          :key2 => 'value',
-          :key1 => 'value'
+          key2: 'value',
+          key1: 'value'
         }
       end
 

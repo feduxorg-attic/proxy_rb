@@ -26,6 +26,7 @@ module ProxyRb
     private
 
     # disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def events
       runtime.event_bus.register(
         :proxy_set,
@@ -63,5 +64,6 @@ module ProxyRb
       )
     end
     # enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
   end
 end

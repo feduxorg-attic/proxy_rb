@@ -34,7 +34,7 @@ module Test
         config[:ProxyAuthProc] = authenticator.method(:authenticate).to_proc
       end
 
-      config[:ProxyContentHandler] = proc do |req, res|
+      config[:ProxyContentHandler] = proc do |_req, res|
         Array(headers).each { |k, v| res.header[k] = v }
         res.status = status_code if status_code
       end

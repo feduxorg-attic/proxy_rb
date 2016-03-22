@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Aruba
 module ProxyRb
   # Generate simple table
@@ -15,7 +16,7 @@ module ProxyRb
     def initialize(hash, opts = {})
       @hash = Hash(hash)
       @opts = {
-        :sort => true
+        sort: true
       }.merge opts
     end
 
@@ -29,7 +30,7 @@ module ProxyRb
 
       name_size = longest_key.length
 
-      rows = hash.each_with_object([]) do |(k,v), a|
+      rows = hash.each_with_object([]) do |(k, v), a|
         a << format("# %-#{name_size}s => %s", k, v)
       end
 
