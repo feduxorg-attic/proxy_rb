@@ -72,7 +72,7 @@ module ProxyRb
           begin
             runtime.announcer.announce :http_response_headers, event.entity.driver.response_headers
           rescue Capybara::NotSupportedByDriverError
-            runtime.announcer.announce :http_response_headers, { 'Message': format('Using #response_headers with the current driver "%s" is currently not supported', event.entity.driver.class) }
+            runtime.announcer.announce :http_response_headers, 'Message': format('Using #response_headers with the current driver "%s" is currently not supported', event.entity.driver.class)
           end
         end
       )
