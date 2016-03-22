@@ -34,6 +34,11 @@ module Test
         config[:ProxyAuthProc] = authenticator.method(:authenticate).to_proc
       end
 
+      config[:ProxyContentHandler] = proc do |req, res|
+        Array(headers).each { |k, v| res.header[k] = v }
+        res.status = status_code if status_code
+      end
+
       proxy = WEBrick::HTTPProxyServer.new config
 
       trap('INT') { proxy.shutdown }
