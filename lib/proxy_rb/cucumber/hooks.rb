@@ -10,7 +10,7 @@ end
   resource_user
   http_response_headers
 ).each do |announcer|
-  Before "@announce_#{announcer}" do
+  Before "@announce-#{announcer.to_s.gsub(/_/, '-')}" do
     proxy_rb.announcer.activate(announcer)
   end
 end
