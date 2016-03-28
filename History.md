@@ -4,6 +4,10 @@ Empty
 
 # RELEASED
 
+## [v0.9.0](https://github.com/cucumber/aruba/compare/v0.8.3...v0.9.0)
+
+* Added some step definitions for cucumber
+
 ## [v0.8.3](https://github.com/cucumber/aruba/compare/v0.8.2...v0.8.3)
 
 * Make warning appear once

@@ -42,14 +42,14 @@ module ProxyRb
 
       # The proxy based on subject
       def proxy
-        ProxyRb::HttpProxy.new(ProxyUrlParser.new(subject))
+        @proxy ||= ProxyRb::HttpProxy.new(ProxyRb::ProxyUrlParser.new(subject))
       end
 
       # Visit an URL
       #
       # @param [String] url
       # rubocop:disable Metrics/AbcSize
-      def visit(url)
+      def visit(url, p = proxy)
         resource = Resource.new(url)
 
         proxy_rb.event_bus.notify Events::ResourceSet.new(resource.url.to_s)
@@ -58,10 +58,10 @@ module ProxyRb
         NonIncludes.clear_environment
         NonIncludes.configure_driver
 
-        proxy_rb.event_bus.notify Events::ProxySet.new(proxy.url.to_s)
-        proxy_rb.event_bus.notify Events::ProxyUserSet.new(proxy.credentials.to_s) unless proxy.credentials.empty?
+        proxy_rb.event_bus.notify Events::ProxySet.new(p.url.to_s)
+        proxy_rb.event_bus.notify Events::ProxyUserSet.new(p.credentials.to_s) unless p.credentials.empty?
 
-        NonIncludes.register_capybara_driver_for_proxy(proxy)
+        NonIncludes.register_capybara_driver_for_proxy(p)
 
         proxy_rb.event_bus.notify Events::BeforeResourceFetched.new(page)
 
