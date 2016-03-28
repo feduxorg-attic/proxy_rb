@@ -4,6 +4,12 @@ Empty
 
 # RELEASED
 
+## [v0.9.3](https://github.com/fedux-org/proxy_rb/compare/v0.9.2...v0.9.3)
+
+* Added best practises for usage of cucumber steps
+* Refactored steps to make it possible to check for body in proxy
+* Added step to set user directly - required for best practises
+
 ## [v0.9.2](https://github.com/fedux-org/proxy_rb/compare/v0.9.1...v0.9.2)
 
 * Fixed proxy authentication for cucumber steps
