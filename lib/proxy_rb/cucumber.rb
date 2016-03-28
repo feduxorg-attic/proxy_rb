@@ -17,6 +17,10 @@ module ProxyRb
     def websites
       @websites ||= []
     end
+
+    def users
+      @users ||= []
+    end
   end
 end
 

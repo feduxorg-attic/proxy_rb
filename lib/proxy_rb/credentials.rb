@@ -5,8 +5,7 @@ require 'shellwords'
 module ProxyRb
   # Hold proxy credentials
   class Credentials
-    attr_reader :user_name
-    attr_accessor :password
+    attr_accessor :user_name, :password
 
     # @param [String] user_name
     #   The user name to use for authentication against proxy

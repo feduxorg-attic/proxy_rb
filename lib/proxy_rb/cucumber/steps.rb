@@ -2,10 +2,23 @@
 require 'proxy_rb/http_proxy'
 require 'proxy_rb/proxy_url_parser'
 
+Given(/^I use the user "([^"]*)" with password "([^"]*)"$/) do |user_name, password|
+  u = OpenStruct.new
+  u.name     = user_name
+  u.password = password
+
+  users << u
+end
+
 Given(/^I use the following proxies:$/) do |table|
   @proxies = table.hashes.map do |r|
     p = ProxyRb::HttpProxy.new(ProxyRb::ProxyUrlParser.new(r[:proxy]))
     p.credentials.password = password(p.credentials.user_name) if p.credentials.password == '<PASSWORD>'
+
+    unless users.nil? || users.empty?
+      p.credentials.user_name = users.first.name
+      p.credentials.password  = users.first.password
+    end
 
     p
   end
