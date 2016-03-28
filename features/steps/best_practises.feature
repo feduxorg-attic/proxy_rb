@@ -25,11 +25,7 @@ Feature: Best practises for using the steps
     And I use a virus infected web server
     And a file named "features/step_definitions.rb" with:
     """
-    Given(/a normal user/) do
-      step 'I use the user "m.mustermann@example.org" with password "*Test123"'
-    end
-
-    When(/the user tries to access a virus infected site/) do
+    Before '@site-production' do
       t =  table(
       <<~EOS
          | proxy                 | 
@@ -38,7 +34,13 @@ Feature: Best practises for using the steps
       )
 
       step 'I use the following proxies:', t
+    end
 
+    Given(/a normal user/) do
+      step 'I use the user "m.mustermann@example.org" with password "*Test123"'
+    end
+
+    When(/the user tries to access a virus infected site/) do
       t =  table(
       <<~EOS
          | url                                          | 
@@ -57,6 +59,7 @@ Feature: Best practises for using the steps
     """
     And a feature file named "best_practises.feature" with:
     """
+    @site-production
     Feature: Blocking access to virus infected sites
       Scenario: Virus was found
         Given a normal user
