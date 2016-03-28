@@ -26,6 +26,7 @@ end
 Given(/^I use a virus blocking proxy(?: at "(.*)")?$/) do |path|
   path = 'bin/http_proxy' if path.nil? || path.empty?
 
+  # rubocop:disable Metrics/LineLength
   hashes = [
     {
       option: 'status_code',
@@ -40,6 +41,7 @@ Given(/^I use a virus blocking proxy(?: at "(.*)")?$/) do |path|
       value: %w#X  5  O  !  P  %  @  A  P  [  4  \  P  Z  X  5  4  (  P  ^  )  7  C  C  )  7  }  $  E  I  C  A  R  -  S  T  A  N  D  A  R  D  -  A  N  T  I  V  I  R  U  S  -  T  E  S  T  -  F  I  L  E  !  $  H  +  H  *#.join('')
     }
   ]
+  # rubocop:enable Metrics/LineLength
 
   step %(an executable named "#{path}" with:), Test::ProxyGenerator.new.render(hashes)
 end
@@ -49,6 +51,7 @@ Given(/^I use a virus infected web server(?: at "(.*)")?$/) do |path|
 
   # The last one wins:
   # If the user sets the user_datas herself, this will be used
+  # rubocop:disable Metrics/LineLength
   hashes = [
     {
       option: 'body',
@@ -59,6 +62,7 @@ Given(/^I use a virus infected web server(?: at "(.*)")?$/) do |path|
       value: 200
     }
   ]
+  # rubocop:enable Metrics/LineLength
 
   step %(an executable named "#{path}" with:), Test::WebServerGenerator.new.render(hashes)
 end

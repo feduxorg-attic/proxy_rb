@@ -50,8 +50,8 @@ When(/^I visit the following websites:$/) do |table|
 end
 
 Then(/the (?:last response|last requested page) should( not)? contain:/) do |not_expected, content|
-  proxies.each do |proxy| 
-    visit websites.last, proxy 
+  proxies.each do |proxy|
+    visit websites.last, proxy
 
     if not_expected
       expect(page).not_to have_content content

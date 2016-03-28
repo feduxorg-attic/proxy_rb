@@ -21,6 +21,7 @@ module Test
     end
 
     # Start server
+    # rubocop:disable Metrics/CyclomaticComplexity
     def start
       require 'webrick'
       require 'webrick/httpproxy'
@@ -57,5 +58,6 @@ module Test
 
       proxy.start
     end
+    # rubocop:enable Metrics/CyclomaticComplexity
   end
 end
