@@ -110,6 +110,13 @@ require 'proxy_rb/cucumber'
 
 Create a file named `features/result.feature`.
 
+Those steps given by `proxy_rb` are considered to be used as low level steps
+which are called from more appropriate high level steps describing uses cases.
+Using them directly is more like unit testing. Please see
+[features/best_practises.feature](features/best_practises.feature] for some
+more examples.
+
+
 ~~~ruby
 Feature: Test the result code of a request
   Scenario: Request is allowed
