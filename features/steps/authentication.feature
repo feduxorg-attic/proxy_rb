@@ -44,7 +44,42 @@ Feature: Authenticate agains proxy
     And a file named "features/support/proxy_rb.rb" with:
     """
     require 'proxy_rb/cucumber'
+    require 'proxy_rb/password_fetchers/vault_password_fetcher'
+
+    ProxyRb.configure do |config|
+      config.password_fetcher = ProxyRb::PasswordFetchers::VaultPasswordFetcher.new(prefix: 'secret')
+    end
+    """
+    And the following local users are authorized to use the proxy:
+      | user  | password |
+      | user1 | *Test123 |
+    And I use a local vault server with the following data at "secret":
+       | user  | password |
+       | user1 | *Test123 |
+    And I run `http_proxy` in background
+    And I run `http_server` in background
+    When I successfully run `cucumber`
+    Then the features should all pass
+
+  Scenario: <PASSWORD> is given in password string and one of the chained fetchers knows about it
+    Given I use a proxy requiring authentication
+    And I use a simple web server
+    And a file named "features/steps.feature" with:
+    """
+    Feature: Steps
+      Scenario: Steps
+        Given I use the following proxies:
+          | proxy                  |
+          | http://user1:<PASSWORD>@localhost:8080  |
+        Then the following requests are allowed to pass the proxy:
+          | url                    |
+          | http://localhost:8000  |
+    """
+    And a file named "features/support/proxy_rb.rb" with:
+    """
+    require 'proxy_rb/cucumber'
     require 'proxy_rb/password_fetchers/environment_password_fetcher'
+    require 'proxy_rb/password_fetchers/vault_password_fetcher'
     require 'proxy_rb/password_fetchers/chaining_password_fetcher'
 
     ProxyRb.configure do |config|
@@ -65,39 +100,6 @@ Feature: Authenticate agains proxy
     When I successfully run `cucumber`
     Then the features should all pass
 
-  Scenario: <PASSWORD> is given in password string and vault knows about it
-    Given I use a proxy requiring authentication
-    And I use a simple web server
-    And a file named "features/steps.feature" with:
-    """
-    Feature: Steps
-      Scenario: Steps
-        Given I use the following proxies:
-          | proxy                  |
-          | http://user1:<PASSWORD>@localhost:8080  |
-        Then the following requests are allowed to pass the proxy:
-          | url                    |
-          | http://localhost:8000  |
-    """
-    And a file named "features/support/proxy_rb.rb" with:
-    """
-    require 'proxy_rb/cucumber'
-    require 'proxy_rb/password_fetchers/vault_password_fetcher'
-
-    ProxyRb.configure do |config|
-      config.password_fetcher = ProxyRb::PasswordFetchers::VaultPasswordFetcher.new(prefix: 'secret')
-    end
-    """
-    And the following local users are authorized to use the proxy:
-      | user  | password |
-      | user1 | *Test123 |
-    And I use a local vault server with the following data at "secret":
-       | user  | password |
-       | user1 | *Test123 |
-    And I run `http_proxy` in background
-    And I run `http_server` in background
-    When I successfully run `cucumber`
-    Then the features should all pass
 
   Scenario: <PASSWORD> is given in password string and no password can be retrieved
     Given I use a proxy requiring authentication
