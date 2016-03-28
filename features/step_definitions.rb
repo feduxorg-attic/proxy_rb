@@ -23,6 +23,46 @@ Given(/^I use a web server requiring authentication$/) do
   step 'I use a web server with the following configuration:', table(%(|option | value |))
 end
 
+Given(/^I use a virus blocking proxy(?: at "(.*)")?$/) do |path|
+  path = 'bin/http_proxy' if path.nil? || path.empty?
+
+  hashes = [
+    {
+      option: 'status_code',
+      value: 403
+    },
+    {
+      option: 'body',
+      value: 'Virus found!'
+    },
+    {
+      option: 'expected_response_body',
+      value: %w#X  5  O  !  P  %  @  A  P  [  4  \  P  Z  X  5  4  (  P  ^  )  7  C  C  )  7  }  $  E  I  C  A  R  -  S  T  A  N  D  A  R  D  -  A  N  T  I  V  I  R  U  S  -  T  E  S  T  -  F  I  L  E  !  $  H  +  H  *#.join('')
+    }
+  ]
+
+  step %(an executable named "#{path}" with:), Test::ProxyGenerator.new.render(hashes)
+end
+
+Given(/^I use a virus infected web server(?: at "(.*)")?$/) do |path|
+  path = 'bin/http_server' if path.nil? || path.empty?
+
+  # The last one wins:
+  # If the user sets the user_datas herself, this will be used
+  hashes = [
+    {
+      option: 'body',
+      value: %w#X  5  O  !  P  %  @  A  P  [  4  \  P  Z  X  5  4  (  P  ^  )  7  C  C  )  7  }  $  E  I  C  A  R  -  S  T  A  N  D  A  R  D  -  A  N  T  I  V  I  R  U  S  -  T  E  S  T  -  F  I  L  E  !  $  H  +  H  *#.join('')
+    },
+    {
+      option: 'status_code',
+      value: 200
+    }
+  ]
+
+  step %(an executable named "#{path}" with:), Test::WebServerGenerator.new.render(hashes)
+end
+
 Given(/^I use a web server(?: at "(.*)")? with the following configuration:/) do |path, table|
   path = 'bin/http_server' if path.nil? || path.empty?
 
