@@ -4,6 +4,10 @@ Empty
 
 # RELEASED
 
+## [v0.9.2](https://github.com/fedux-org/proxy_rb/compare/v0.9.1...v0.9.2)
+
+* Fixed proxy authentication for cucumber steps
+
 ## [v0.9.1](https://github.com/fedux-org/proxy_rb/compare/v0.9.0...v0.9.1)
 
 * Added initializer for cucumber which I forgot to add earlier
