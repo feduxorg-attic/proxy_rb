@@ -3,7 +3,12 @@ set -euo pipefail
 IFS=$'\n\t'
 
 which ruby 2>/dev/null >&2 || {
-  echo 'Bitte "ruby" installieren'
+  echo 'Please install "ruby".'
+  exit 2
+}
+
+which vault 2>/dev/null >&2 || {
+  echo 'Please install"HashiCorp vault". See README.md for more information.'
   exit 2
 }
 

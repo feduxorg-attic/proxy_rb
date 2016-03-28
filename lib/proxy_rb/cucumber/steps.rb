@@ -3,7 +3,12 @@ require 'proxy_rb/http_proxy'
 require 'proxy_rb/proxy_url_parser'
 
 Given(/^I use the following proxies:$/) do |table|
-  @proxies = table.hashes.map { |r| ProxyRb::HttpProxy.new(ProxyRb::ProxyUrlParser.new(r[:proxy])) }
+  @proxies = table.hashes.map do |r|
+    p = ProxyRb::HttpProxy.new(ProxyRb::ProxyUrlParser.new(r[:proxy])) 
+    p.credentials.password = password(p.credentials.user_name) if p.credentials.password == '<PASSWORD>'
+
+    p
+  end
 end
 
 Then(/the following requests are( not)? allowed to pass the proxy:/) do |forbidden, table|

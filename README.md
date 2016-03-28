@@ -156,7 +156,7 @@ into a path which is part of the "PATH"-environment variable - even on Windows.
 
 ~~~bash
 curl -o /tmp/vault.zip https://releases.hashicorp.com/vault/0.5.1/vault_0.5.1_linux_amd64.zip
-unzip /tmp/vault.zip
+unzip -d /tmp/ /tmp/vault.zip
 install -D /tmp/vault -m 0755 ~/bin/vault
 ~~~
 
