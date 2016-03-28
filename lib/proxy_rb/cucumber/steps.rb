@@ -42,18 +42,22 @@ Then(/the following requests are( not)? allowed to pass the proxy:/) do |forbidd
 end
 
 When(/^I visit "([^"]*)"$/) do |url|
-  Array(proxies.first).each { |proxy| visit url, proxy }
+  websites << url
 end
 
 When(/^I visit the following websites:$/) do |table|
-  @websites = table.hashes.map { |r| r[:url] }
+  websites.concat table.hashes.map { |r| r[:url] }
 end
 
 Then(/the (?:last response|last requested page) should( not)? contain:/) do |not_expected, content|
-  if not_expected
-    expect(page).not_to have_content content
-  else
-    expect(page).to have_content content
+  proxies.each do |proxy| 
+    visit websites.last, proxy 
+
+    if not_expected
+      expect(page).not_to have_content content
+    else
+      expect(page).to have_content content
+    end
   end
 end
 
