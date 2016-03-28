@@ -19,7 +19,7 @@ module ProxyRb
     end
 
     desc 'init', 'Initialize proxy_rb'
-    option :test_framework, default: 'rspec', enum: %w(rspec), desc: 'Choose which test framework to use'
+    option :test_framework, default: 'rspec', enum: %w(rspec cucumber), desc: 'Choose which test framework to use'
     def init
       ProxyRb::Initializer.new.call(options[:test_framework])
     end

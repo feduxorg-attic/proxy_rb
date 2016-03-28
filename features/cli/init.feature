@@ -41,6 +41,22 @@ Feature: Initialize project with "proxy_rb"
     0 examples, 0 failures
     """
 
+  Scenario: Create files for Cucumber
+    When I successfully run `proxy_rb init --test-framework cucumber`
+    And the file "features/support/proxy_rb.rb" should contain:
+    """
+    require 'proxy_rb/cucumber'
+    """
+    And the file "Gemfile" should contain:
+    """
+    gem 'proxy_rb'
+    """
+    When I successfully run `rspec`
+    Then the output should contain:
+    """
+    0 examples, 0 failures
+    """
+
   Scenario: Unknown Test Framework
     When I run `proxy_rb init --test-framework unknown`
     Then the output should contain:

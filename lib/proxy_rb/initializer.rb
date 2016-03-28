@@ -36,29 +36,6 @@ end
 
 # ProxyRb
 module ProxyRb
-  # Initializers
-  module Initializers
-    # Default Initializer
-    #
-    # This handles invalid values for initializer.
-    #
-    # @private
-    class FailingInitializer
-      class << self
-        def match?(*)
-          true
-        end
-
-        def start(*)
-          raise ArgumentError, %(Unknown test framework. Please use "rspec" )
-        end
-      end
-    end
-  end
-end
-
-# ProxyRb
-module ProxyRb
   # Initializer
   module Initializers
     # Add proxy_rb + rspec to project
@@ -100,6 +77,33 @@ end
 
 # ProxyRb
 module ProxyRb
+  # Initializer
+  module Initializers
+    # Add proxy_rb + rspec to project
+    #
+    # @private
+    class CucumberInitializer < Thor::Group
+      include Thor::Actions
+
+      no_commands do
+        def self.match?(framework)
+          :cucumber == framework.downcase.to_sym
+        end
+      end
+
+      def create_helper; end
+
+      def create_support_file
+        create_file 'features/support/proxy_rb.rb', <<~EOS
+        require 'proxy_rb/cucumber'
+        EOS
+      end
+    end
+  end
+end
+
+# ProxyRb
+module ProxyRb
   # The whole initializer
   #
   # This one uses the specific initializers to generate the needed files.
@@ -115,6 +119,7 @@ module ProxyRb
     def initialize
       @initializers = []
       @initializers << Initializers::RSpecInitializer
+      @initializers << Initializers::CucumberInitializer
     end
 
     # Create files etc.
