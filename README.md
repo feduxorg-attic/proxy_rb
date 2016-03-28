@@ -26,7 +26,13 @@ Or install it yourself as:
 
 ## Usage
 
-### Getting started
+Please have a look at the
+["features/getting_started"](features/getting_started)-directory for more
+information about that topic. You may need to adjust the specs/features
+according to your setup. And please, also read [Caveats](#caveats) as there
+some limitations - e.g. no support for NTML and Kerberos.
+
+### Getting started with "proxy_rb" and "rspec"
 
 The following steps are only a suggestion. If you normally use a different
 workflow, this is ok. Just make sure, that the `proxy_rb/rspec`-file is
@@ -76,9 +82,48 @@ RSpec.describe 'My Proxy' do
 end
 ~~~
 
-Please have a look at the
-["features/getting_started"](features/getting_started)-directory for more
-information about that topic.
+*Run command*
+
+Then run `rspec`.
+
+### Getting started with "proxy_rb" and "cucumber"
+
+The following steps are only a suggestion. If you normally use a different
+workflow, this is ok. Just make sure, that the `proxy_rb/cucumber`-file is
+required by `cucumber` directly or indirectly.
+
+*Initialize cucumber*
+
+~~~bash
+bundle exec cucumber --init
+~~~
+
+*Load library*
+
+Create a file named `features/support/proxy_rb.rb`.
+
+~~~ruby
+require 'proxy_rb/cucumber'
+~~~
+
+*Create first Tests* 
+
+Create a file named `features/result.feature`.
+
+~~~ruby
+Feature: Test the result code of a request
+  Scenario: Request is allowed
+    Given I use the following proxies:
+      | proxy                  |
+      | http://localhost:8080  |
+    Then the following requests are allowed to pass the proxy:
+      | url                    |
+      | http://example.com |
+~~~
+
+*Run command*
+
+Then run `cucumber`.
 
 ### Getting on with "proxy_rb"
 

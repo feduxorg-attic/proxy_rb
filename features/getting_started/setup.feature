@@ -7,7 +7,7 @@ Feature: Setup your project to use "proxy_rb"
     And I run `http_proxy` in background
     And I run `http_server` in background
 
-  Scenario: Setup project
+  Scenario: Setup project for "rspec"
     Given a file named "spec/spec_helper.rb" with:
     """
     $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
@@ -32,3 +32,22 @@ Feature: Setup your project to use "proxy_rb"
     """
     When I successfully run `rspec`
     Then the specs should all pass
+
+  Scenario: Setup project for "cucumber"
+    Given a file named "features/support/proxy_rb.rb" with:
+    """
+    require 'proxy_rb/cucumber'
+    """
+    And a file named "features/result.feature" with:
+    """
+    Feature: Test the result code of a request
+      Scenario: Request is allowed
+        Given I use the following proxies:
+          | proxy                  |
+          | http://localhost:8080  |
+        Then the following requests are allowed to pass the proxy:
+          | url                    |
+          | http://localhost:8000  |
+    """
+    When I successfully run `cucumber`
+    Then the features should all pass
