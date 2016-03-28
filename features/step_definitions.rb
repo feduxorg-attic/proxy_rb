@@ -7,6 +7,10 @@ Given(/^a spec file named "([^"]*)" with:$/) do |path, content|
   step %(a file named "#{File.join('spec', path)}" with:), content
 end
 
+Given(/^a feature file named "([^"]*)" with:$/) do |path, content|
+  step %(a file named "#{File.join('features', path)}" with:), content
+end
+
 After do
   terminate_all_commands
 end
