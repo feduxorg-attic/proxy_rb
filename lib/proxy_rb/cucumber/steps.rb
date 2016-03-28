@@ -4,7 +4,7 @@ require 'proxy_rb/proxy_url_parser'
 
 Given(/^I use the following proxies:$/) do |table|
   @proxies = table.hashes.map do |r|
-    p = ProxyRb::HttpProxy.new(ProxyRb::ProxyUrlParser.new(r[:proxy])) 
+    p = ProxyRb::HttpProxy.new(ProxyRb::ProxyUrlParser.new(r[:proxy]))
     p.credentials.password = password(p.credentials.user_name) if p.credentials.password == '<PASSWORD>'
 
     p
