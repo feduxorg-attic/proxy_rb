@@ -4,6 +4,10 @@ Empty
 
 # RELEASED
 
+## [v0.9.1](https://github.com/fedux-org/proxy_rb/compare/v0.9.0...v0.9.1)
+
+* Added initializer for cucumber which I forgot to add earlier
+
 ## [v0.9.0](https://github.com/fedux-org/proxy_rb/compare/v0.8.3...v0.9.0)
 
 * Added some step definitions for cucumber
