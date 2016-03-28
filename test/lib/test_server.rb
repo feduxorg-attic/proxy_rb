@@ -11,7 +11,7 @@ module Test
       @cfg = JSON.parse(c).to_hash.each_with_object({}) { |(k, v), a| a[k.to_sym] = v }
 
       @headers       = @cfg[:headers]
-      @body          = @cfg.fetch(:body, 'Example Domain')
+      @body          = @cfg[:body]
       @status_code   = @cfg[:status_code]
       @user_database = @cfg[:user_database]
     end

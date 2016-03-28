@@ -9,6 +9,8 @@ module Test
     def initialize(*args)
       super(*args)
 
+      @body = @cfg.fetch(:body, 'Example Domain')
+
       @config = Hash(
         @cfg.delete(:config)
       ).merge(

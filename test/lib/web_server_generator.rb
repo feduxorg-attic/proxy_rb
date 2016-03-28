@@ -27,9 +27,9 @@ module Test
       $LOAD_PATH << '#{File.expand_path('../', __FILE__)}'
       require 'http_server'
 
-      config = %(
-      #{JSON.dump(config)}
-      )
+      config = %#
+      #{JSON.generate(config)}
+      #
 
       Test::HttpServer.new(config).start
       EOS

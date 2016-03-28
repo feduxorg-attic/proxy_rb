@@ -6,8 +6,12 @@ require_relative 'test_server'
 module Test
   # HTTP Proxy
   class HttpProxy < TestServer
+    attr_reader :expected_response_body
+
     def initialize(*args)
       super(*args)
+
+      @expected_response_body = @cfg.delete(:expected_response_body)
 
       @config = Hash(
         @cfg.delete(:config)
@@ -34,9 +38,16 @@ module Test
         config[:ProxyAuthProc] = authenticator.method(:authenticate).to_proc
       end
 
+      body_has_content = proc do |body|
+        return true unless expected_response_body
+
+        expected_response_body == body
+      end
+
       config[:ProxyContentHandler] = proc do |_req, res|
         Array(headers).each { |k, v| res.header[k] = v }
-        res.status = status_code if status_code
+        res.body   = body        if body && body_has_content
+        res.status = status_code if status_code && body_has_content
       end
 
       proxy = WEBrick::HTTPProxyServer.new config
