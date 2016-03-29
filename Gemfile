@@ -4,8 +4,11 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in local_pac.gemspec
 gemspec
 
+# Required
 gem 'poltergeist'
 gem 'selenium-webdriver'
+gem 'cucumber', require: false
+gem 'rspec', require: false
 
 group :debug do
   gem 'pry'
@@ -28,7 +31,6 @@ group :development, :test do
   gem 'bundler', '~> 1.3', require: false
   gem 'command_exec', require: false
   gem 'coveralls', require: false
-  gem 'cucumber', require: false
   gem 'erubis'
   gem 'filegen'
   gem 'foreman', require: false
@@ -46,7 +48,6 @@ group :development, :test do
   gem 'travis-lint', require: false
   gem 'versionomy', require: false
   gem 'yard', require: false
-  gem 'rspec', require: false
   gem 'webmock', require: false
   gem 'rack-test', require: false
 end
