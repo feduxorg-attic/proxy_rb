@@ -24,7 +24,7 @@ module ProxyRb
                   end
 
         content = if File.exist? file
-                    %(gem 'proxy_rb', '~> #{ProxyRb::VERSION}')
+                    %(gem 'proxy_rb', '~> #{ProxyRb::VERSION}'\n)
                   else
                     %(source 'https://rubygems.org'\ngem 'proxy_rb', '~> #{ProxyRb::VERSION}'\n)
                   end
@@ -48,6 +48,10 @@ module ProxyRb
         def self.match?(framework)
           :rspec == framework.downcase.to_sym
         end
+      end
+
+      def add_gem
+        append_to_file 'Gemfile', %(gem 'rspec', '~>3.3'\n)
       end
 
       def create_helper
@@ -91,6 +95,10 @@ module ProxyRb
         end
       end
 
+      def add_gem
+        append_to_file 'Gemfile', %(gem 'cucumber', '~>2.0'\n)
+      end
+
       def create_helper; end
 
       def create_support_file
@@ -124,14 +132,14 @@ module ProxyRb
 
     # Create files etc.
     def call(test_framework)
+      Initializers::CommonInitializer.start [], {}
+
       begin
         initializers.find { |i| i.match? test_framework }.start [], {}
       rescue ArgumentError => e
         $stderr.puts e.message
         exit 0
       end
-
-      Initializers::CommonInitializer.start [], {}
     end
   end
 end

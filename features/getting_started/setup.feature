@@ -8,6 +8,9 @@ Feature: Setup your project to use "proxy_rb"
     And I run `http_server` in background
 
   Scenario: Setup project for "rspec"
+
+    You may need to add `gem 'rspec'` to your `Gemfile`.
+
     Given a file named "spec/spec_helper.rb" with:
     """
     $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
@@ -34,6 +37,9 @@ Feature: Setup your project to use "proxy_rb"
     Then the specs should all pass
 
   Scenario: Setup project for "cucumber"
+
+    You may need to add `gem 'cucumber'` to your `Gemfile`.
+
     Given a file named "features/support/proxy_rb.rb" with:
     """
     require 'proxy_rb/cucumber'
