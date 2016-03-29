@@ -2,10 +2,10 @@
 require 'proxy_rb/http_proxy'
 require 'proxy_rb/proxy_url_parser'
 
-Given(/^I use the user "([^"]*)" with password "([^"]*)"$/) do |user_name, password|
+Given(/^I use the user "([^"]*)"(?: with password "([^"]*)")?$/) do |user_name, password|
   u = OpenStruct.new
   u.name     = user_name
-  u.password = password
+  u.password = password || password(user_name)
 
   users << u
 end

@@ -4,6 +4,10 @@ Empty
 
 # RELEASED
 
+## [v0.10.1](https://github.com/fedux-org/proxy_rb/compare/v0.10.0...v0.10.1)
+
+* Add support for password fetching for a particular step
+
 ## [v0.10.0](https://github.com/fedux-org/proxy_rb/compare/v0.9.3...v0.10.0)
 
 * Fixed dependency problem with `thor`

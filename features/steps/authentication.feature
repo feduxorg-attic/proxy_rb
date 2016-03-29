@@ -27,6 +27,30 @@ Feature: Authenticate agains proxy
     When I successfully run `cucumber`
     Then the features should all pass
 
+  Scenario: Set directly via step when password is missing, but environment variable is set
+    Given I use a proxy requiring authentication
+    And I use a simple web server
+    And a file named "features/steps.feature" with:
+    """
+    Feature: Steps
+      Scenario: Steps
+        Given I use the user "user1"
+        And I use the following proxies:
+          | proxy                  |
+          | http://localhost:8080  |
+        Then the following requests are allowed to pass the proxy:
+          | url                    |
+          | http://localhost:8000  |
+    """
+    And the following local users are authorized to use the proxy:
+      | user  | password |
+      | user1 | *Test123 |
+    And I set the environment variable "SECRET_USER1" to "*Test123"
+    And I run `http_proxy` in background
+    And I run `http_server` in background
+    When I successfully run `cucumber`
+    Then the features should all pass
+
   Scenario: <PASSWORD> is given in password string and environment variable is set
     Given I use a proxy requiring authentication
     And I use a simple web server
