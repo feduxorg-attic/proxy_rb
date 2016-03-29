@@ -25,19 +25,29 @@ Given(/^I use the following proxies:$/) do |table|
 end
 
 Then(/the following requests are( not)? allowed to pass the proxy:/) do |forbidden, table|
-  requests = []
+  step 'I visit the following websites:', table
+
+  if forbidden
+    step 'all requests are not allowed to pass the proxy:'
+  else
+    step 'all requests are allowed to pass the proxy'
+  end
+end
+
+Then(/all requests are( not)? allowed to pass the proxy/) do |forbidden|
+  results = []
 
   proxies.each do |proxy|
-    table.hashes.map { |r| r[:url] }.each do |r|
-      visit r, proxy
-      requests << page.dup
+    websites.each do |w|
+      visit w, proxy
+      results << page.dup
     end
   end
 
   if forbidden
-    expect(requests).to ProxyRb::Matchers.all be_forbidden
+    expect(results).to ProxyRb::Matchers.all be_forbidden
   else
-    expect(requests).to ProxyRb::Matchers.all be_successful
+    expect(results).to ProxyRb::Matchers.all be_successful
   end
 end
 

@@ -10,13 +10,22 @@ Feature: Check the result of a requests
     And a file named "features/steps.feature" with:
     """
     Feature: Steps
-      Scenario: Steps
+      Scenario: Check it all at once
         Given I use the following proxies:
           | proxy                  |
           | http://localhost:8080  |
         Then the following requests are allowed to pass the proxy:
           | url                    |
           | http://localhost:8000  |
+
+      Scenario: Do it one after another
+        Given I use the following proxies:
+          | proxy                  |
+          | http://localhost:8080  |
+        When I visit the following websites:
+          | url                   |
+          | http://localhost:8000 |
+        Then all requests are allowed to pass the proxy
     """
     And I run `http_proxy` in background
     And I run `http_server` in background
@@ -31,13 +40,22 @@ Feature: Check the result of a requests
     And a file named "features/steps.feature" with:
     """
     Feature: Steps
-      Scenario: Steps
+      Scenario: Check it all at once
         Given I use the following proxies:
           | proxy                  |
           | http://localhost:8080  |
         Then the following requests are not allowed to pass the proxy:
           | url                    |
           | http://localhost:8000  |
+
+      Scenario: Do it one after another
+        Given I use the following proxies:
+          | proxy                  |
+          | http://localhost:8080  |
+        When I visit the following websites:
+          | url                   |
+          | http://localhost:8000 |
+        Then all requests are not allowed to pass the proxy
     """
     And I run `http_proxy` in background
     And I run `http_server` in background
