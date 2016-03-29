@@ -4,6 +4,13 @@ Empty
 
 # RELEASED
 
+## [v0.10.0](https://github.com/fedux-org/proxy_rb/compare/v0.9.3...v0.10.0)
+
+* Fixed dependency problem with `thor`
+* Removed `rspec` dependency because otherwise we would also need to add a
+  `cucumbr` dependency. Now it's up to the user to add this to his/her
+  `Gemfile`.
+
 ## [v0.9.3](https://github.com/fedux-org/proxy_rb/compare/v0.9.2...v0.9.3)
 
 * Added best practises for usage of cucumber steps
