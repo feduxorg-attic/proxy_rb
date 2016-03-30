@@ -10,11 +10,11 @@ RSpec::Matchers.define :have_mime_type do |expected|
 
     msg << %(expected that response of "#{resource}" has mime type "#{expected}", but has "#{actual}".)
 
-    if proxy.nil? || proxy.empty?
-      msg << %(No proxy was used.)
-    else
-      msg << %(It was fetched via proxy "#{proxy.to_s}".)
-    end
+    msg << if proxy.nil? || proxy.empty?
+             %(No proxy was used.)
+           else
+             %(It was fetched via proxy "#{proxy}".)
+           end
 
     msg.join ' '
   end
@@ -24,11 +24,11 @@ RSpec::Matchers.define :have_mime_type do |expected|
 
     msg << %(expected that response of "#{resource}" does not have mime type "#{expected}".)
 
-    if proxy.nil? || proxy.empty?
-      msg << %(No proxy was used.)
-    else
-      msg << %(It was fetched via proxy "#{proxy.to_s}".)
-    end
+    msg << if proxy.nil? || proxy.empty?
+             %(No proxy was used.)
+           else
+             %(It was fetched via proxy "#{proxy}".)
+           end
 
     msg.join ' '
   end

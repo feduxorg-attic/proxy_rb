@@ -7,13 +7,13 @@ module ProxyRb
   @logger     = Logger.new($stderr)
 
   ANNOUNCERS = %i(
-      proxy
-      proxy_user
-      resource
-      resource_user
-      http_response_headers
-      status_code
-  )
+    proxy
+    proxy_user
+    resource
+    resource_user
+    http_response_headers
+    status_code
+  ).freeze
 
   class << self
     protected
