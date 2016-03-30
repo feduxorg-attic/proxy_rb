@@ -23,7 +23,7 @@ Given(/^I use a web server requiring authentication$/) do
   step 'I use a web server with the following configuration:', table(%(|option | value |))
 end
 
-Given(/^I use a virus blocking proxy(?: at "(.*)")?$/) do |path|
+Given(/^I use a virus blocking proxy(?: at "(.*)")?(?: requiring authentication)?$/) do |path|
   path = 'bin/http_proxy' if path.nil? || path.empty?
 
   # rubocop:disable Metrics/LineLength
@@ -39,6 +39,10 @@ Given(/^I use a virus blocking proxy(?: at "(.*)")?$/) do |path|
     {
       option: 'expected_response_body',
       value: %w#X  5  O  !  P  %  @  A  P  [  4  \  P  Z  X  5  4  (  P  ^  )  7  C  C  )  7  }  $  E  I  C  A  R  -  S  T  A  N  D  A  R  D  -  A  N  T  I  V  I  R  U  S  -  T  E  S  T  -  F  I  L  E  !  $  H  +  H  *#.join('')
+    },
+    {
+      option: 'user_database',
+      value: expand_path('config/htpasswd.proxy')
     }
   ]
   # rubocop:enable Metrics/LineLength
@@ -60,6 +64,10 @@ Given(/^I use a virus infected web server(?: at "(.*)")?$/) do |path|
     {
       option: 'status_code',
       value: 200
+    },
+    {
+      option: 'user_database',
+      value: expand_path('config/htpasswd.web_server')
     }
   ]
   # rubocop:enable Metrics/LineLength

@@ -21,8 +21,17 @@ Feature: Best practises for using the steps
     proxy server. It demonstrate the use of the low level steps provided by
     `proxy_rb`.
 
-    Given I use a virus blocking proxy
+    Given I use a virus blocking proxy requiring authentication
     And I use a virus infected web server
+    And a feature file named "best_practises.feature" with:
+    """
+    @site-production
+    Feature: Blocking access to virus infected sites
+      Scenario: Virus was found
+        Given a normal user
+        When the user tries to access a virus infected site
+        Then all requests to those virus infected sites should be blocked
+    """
     And a file named "features/step_definitions.rb" with:
     """
     Before '@site-production' do
@@ -37,7 +46,7 @@ Feature: Best practises for using the steps
     end
 
     Given(/a normal user/) do
-      step 'I use the user "m.mustermann@example.org" with password "*Test123"'
+      step 'I use the user "user1" with password "*Test123"'
     end
 
     When(/the user tries to access a virus infected site/) do
@@ -57,15 +66,9 @@ Feature: Best practises for using the steps
       step 'all responses should contain:', 'Virus found!'
     end
     """
-    And a feature file named "best_practises.feature" with:
-    """
-    @site-production
-    Feature: Blocking access to virus infected sites
-      Scenario: Virus was found
-        Given a normal user
-        When the user tries to access a virus infected site
-        Then all requests to those virus infected sites should be blocked
-    """
+    And the following local users are authorized to use the proxy:
+      | user  | password |
+      | user1 | *Test123 |
     And I run `http_proxy` in background
     And I run `http_server` in background
     When I run `cucumber`

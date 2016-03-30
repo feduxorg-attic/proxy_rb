@@ -8,17 +8,32 @@ Given(/^I use the user "([^"]*)"(?: with password "([^"]*)")?$/) do |user_name, 
   u.password = password || password(user_name)
 
   users << u
+
+  proxies.each do |p|
+    p.credentials.user_name = users.last.name
+    p.credentials.password  = users.last.password
+  end
 end
 
 Given(/^I use the following proxies:$/) do |table|
   @proxies = table.hashes.map do |r|
     p = ProxyRb::HttpProxy.new(ProxyRb::ProxyUrlParser.new(r[:proxy]))
-    p.credentials.password = password(p.credentials.user_name) if p.credentials.password == '<PASSWORD>'
 
-    unless users.nil? || users.empty?
-      p.credentials.user_name = users.first.name
-      p.credentials.password  = users.first.password
+    # Hide password by using <PASSWORD> => retrieve it using fetcher
+    if p.credentials.password == '<PASSWORD>'
+      p.credentials.password = password(p.credentials.user_name)
+      next p
     end
+
+    # Username and password are already set
+    next p if p.credentials.password && p.credentials.user_name
+
+    # No users have be defined
+    next p if users.nil? || users.empty?
+
+    # Use last user since nothing else makes sense
+    p.credentials.user_name = users.last.name
+    p.credentials.password  = users.last.password
 
     p
   end
