@@ -1,2 +1,2 @@
-default: -t @wip:3 -t ~@broken-external -t ~@future -t ~@broken
-all: -t ~@wip -t ~@broken-external -t ~@future -t ~@broken
+wip: -t @wip:3 -t ~@broken-external -t ~@future -t ~@broken
+default: -t ~@wip -t ~@broken-external -t ~@future -t ~@broken
