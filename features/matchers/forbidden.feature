@@ -21,7 +21,7 @@ Feature: Check if request is forbidden
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
       subject { NoProxy }
-        context 'no proxy' do
+      context 'no proxy' do
         before { visit 'http://localhost:8000' }
 
         it { expect(request).to be_forbidden }
@@ -40,7 +40,7 @@ Feature: Check if request is forbidden
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
       subject { NoProxy }
-        context 'no proxy' do
+      context 'no proxy' do
         before { visit 'http://localhost:8000' }
 
         it { expect(request).not_to be_forbidden }
@@ -50,7 +50,7 @@ Feature: Check if request is forbidden
     When I run `rspec`
     Then the specs should all pass
 
-  Scenario: If it should not match but fails it outputs a meaningful error message
+  Scenario: If it should match but fails it outputs a meaningful error message
     Given I use a simple web server
     And I run `http_server` in background
     And a spec file named "test_spec.rb" with:
@@ -59,7 +59,7 @@ Feature: Check if request is forbidden
 
     RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
       subject { NoProxy }
-        context 'no proxy' do
+      context 'no proxy' do
         before { visit 'http://localhost:8000' }
 
         it { expect(request).to be_forbidden }
@@ -69,10 +69,10 @@ Feature: Check if request is forbidden
     When I run `rspec`
     Then the specs should not pass with:
     """
-    expected that response has status code 403, but has 200
+    expected that response of "http://localhost:8000" has status code 403, but has 200. No proxy was used.
     """
 
-  Scenario: If it should match but fails it outputs a meaningful error message
+  Scenario: If it should not match but fails it outputs a meaningful error message
     Given I use a web server with the following configuration:
        | option      | value |
        | status_code | 403   |

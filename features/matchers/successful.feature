@@ -50,7 +50,7 @@ Feature: Check if request is successful
     When I run `rspec`
     Then the specs should all pass
 
-  Scenario: If it should not match but fails it outputs a meaningful error message
+  Scenario: If it should match but fails it outputs a meaningful error message
     Given I use a web server with the following configuration:
        | option      | value |
        | status_code | 403   |
@@ -71,10 +71,10 @@ Feature: Check if request is successful
     When I run `rspec`
     Then the specs should not pass with:
     """
-    expected that response has status code 2xx, but has 403
+    expected that response of "http://localhost:8000" has status code 2xx, but has 403. No proxy was used.
     """
 
-  Scenario: If it should match but fails it outputs a meaningful error message
+  Scenario: If it should not match but fails it outputs a meaningful error message
     Given I use a simple web server
     And I run `http_server` in background
     And a spec file named "test_spec.rb" with:
