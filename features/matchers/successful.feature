@@ -93,7 +93,34 @@ Feature: Check if request is successful
     When I run `rspec`
     Then the specs should not pass with:
     """
-    expected that response does not have status code 2xx
+    expected that response of "http://localhost:8000" does not have status code 2xx. No proxy was used.
+    """
+
+  Scenario: If it should not match but fails it outputs a meaningful error message even if a proxy is used
+    Given I use a simple proxy
+    And I use a web server with the following configuration:
+       | option      | value |
+       | status_code | 200   |
+    And I run `http_server` in background
+    And I run `http_proxy` in background
+    And a spec file named "test_spec.rb" with:
+    """
+    require 'spec_helper'
+
+    RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
+      subject { 'http://localhost:8080' }
+
+      context 'With proxy' do
+        before { visit 'http://localhost:8000' }
+
+        it { expect(request).not_to be_successful }
+      end
+    end
+    """
+    When I run `rspec`
+    Then the specs should not pass with:
+    """
+    expected that response of "http://localhost:8000" does not have status code 2xx. It was fetched via proxy "http://localhost:8080".
     """
 
   Scenario: When server/proxy returns nil or zero as HTTP status code (strict mode)

@@ -84,6 +84,8 @@ module ProxyRb
     # @return [Hash]
     #   the converted url
     def to_hash
+      return {} if empty?
+
       url.to_hash
     end
   end

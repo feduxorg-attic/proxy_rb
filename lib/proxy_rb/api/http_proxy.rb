@@ -40,6 +40,10 @@ module ProxyRb
     module HttpProxy
       include ::Capybara::DSL
 
+      # !@attribute resource
+      #   The resource which should be visited/downloaded
+      attr_reader :resource
+
       # The proxy based on subject
       def proxy
         @proxy ||= ProxyRb::HttpProxy.new(ProxyRb::ProxyUrlParser.new(subject))
@@ -50,7 +54,7 @@ module ProxyRb
       # @param [String] url
       # rubocop:disable Metrics/AbcSize
       def visit(url, p = proxy)
-        resource = Resource.new(url)
+        @resource = Resource.new(url)
 
         proxy_rb.event_bus.notify Events::ResourceSet.new(resource.url.to_s)
         proxy_rb.event_bus.notify Events::ResourceUserSet.new(resource.credentials.to_s) unless resource.credentials.empty?
