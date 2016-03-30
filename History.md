@@ -4,6 +4,10 @@ Empty
 
 # RELEASED
 
+## [v0.10.5](https://github.com/fedux-org/proxy_rb/compare/v0.10.5...v0.10.5)
+
+* Fix for overwriting proxies
+
 ## [v0.10.4](https://github.com/fedux-org/proxy_rb/compare/v0.10.3...v0.10.4)
 
 * Don't overwrite proxies set by multiple tags
