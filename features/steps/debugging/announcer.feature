@@ -5,12 +5,12 @@ Feature: Output information for debugging
     Given I use a fixture named "proxy-config"
     And I look for executables in "bin" within the current directory
 
-  Scenario: Announce proxy used
+  Scenario: Announce all
     Given I use a simple proxy
     And I use a simple web server
     And a file named "features/steps.feature" with:
     """
-    @announce-proxy
+    @announce
     Feature: Steps
       Scenario: Steps
         Given I use the following proxies:
@@ -26,6 +26,49 @@ Feature: Output information for debugging
     Then the features should all pass with:
     """
     Proxy: http://localhost:8080
+    """
+
+  Scenario: Announce proxy used
+    Given I use a simple proxy
+    And I use a simple web server
+    And a file named "features/steps.feature" with:
+    """
+    @announce
+    Feature: Steps
+      Scenario: Steps
+        Given I use the following proxies:
+          | proxy                  |
+          | http://localhost:8080  |
+        Then the following requests are allowed to pass the proxy:
+          | url                    |
+          | http://localhost:8000  |
+    """
+    And I run `http_proxy` in background
+    And I run `http_server` in background
+    When I successfully run `cucumber`
+    Then the features should all pass with:
+    """
+    Proxy: http://localhost:8080
+    """
+    And the features should all pass with:
+    """
+    Proxy User: user1:\*Test123
+    """
+    And the features should all pass with:
+    """
+    Resource: http://localhost:8000
+    """
+    And the features should all pass with:
+    """
+    Resource User: user1:\*Test123
+    """
+    And the features should all pass with:
+    """
+    Server
+    """
+    And the features should all pass with:
+    """
+    HTTP Status Code: 200
     """
 
   Scenario: Announce proxy user used
@@ -128,4 +171,27 @@ Feature: Output information for debugging
     And the output should contain:
     """
     Server
+    """
+
+  Scenario: Announce HTTP status code
+    Given I use a simple proxy
+    And I use a simple web server
+    And a file named "features/steps.feature" with:
+    """
+    @announce-status-code
+    Feature: Steps
+      Scenario: Steps
+        Given I use the following proxies:
+          | proxy                  |
+          | http://localhost:8080  |
+        Then the following requests are allowed to pass the proxy:
+          | url                    |
+          | http://localhost:8000  |
+    """
+    And I run `http_proxy` in background
+    And I run `http_server` in background
+    When I successfully run `cucumber`
+    Then the features should all pass with:
+    """
+    HTTP Status Code: 200
     """

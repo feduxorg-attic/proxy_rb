@@ -80,6 +80,7 @@ module ProxyRb
       output_format :resource_user, proc { |v| format('Resource User: %s', v) }
       output_format :resource, proc { |v| format('Resource: %s', v) }
       output_format :http_response_headers, proc { |v| format("<<-HTTP_RESPONSE_HEADERS\n%s\nHTTP_RESPONSE_HEADERS", SimpleTable.new(v)) }
+      output_format :status_code, proc { |v| format('HTTP Status Code: %s', v) }
     end
 
     def output_format(channel, string = '%s', &block)

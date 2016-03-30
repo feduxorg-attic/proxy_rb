@@ -1,28 +1,18 @@
 # frozen_string_literal: true
+require 'proxy_rb/main'
+
 Before do
   setup_proxy_rb
 end
 
-%i(
-  proxy
-  proxy_user
-  resource
-  resource_user
-  http_response_headers
-).each do |announcer|
+ProxyRb::ANNOUNCERS.each do |announcer|
   Before "@announce-#{announcer.to_s.tr('_', '-')}" do
     proxy_rb.announcer.activate(announcer)
   end
 end
 
 Before '@announce' do
-  %i(
-    proxy
-    proxy_user
-    resource
-    resource_user
-    http_response_headers
-  ).each do |announcer|
+  ProxyRb::ANNOUNCERS.each do |announcer|
     proxy_rb.announcer.activate(announcer)
   end
 end

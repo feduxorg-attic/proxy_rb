@@ -6,6 +6,15 @@ module ProxyRb
   @debug_mode = false
   @logger     = Logger.new($stderr)
 
+  ANNOUNCERS = %i(
+      proxy
+      proxy_user
+      resource
+      resource_user
+      http_response_headers
+      status_code
+  )
+
   class << self
     protected
 
@@ -15,6 +24,7 @@ module ProxyRb
 
     attr_reader :logger
 
+    # What kind of information can be announce while debugging
     def debug_mode_enabled?
       debug_mode == true
     end

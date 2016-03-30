@@ -53,6 +53,10 @@ Feature: Announce information
     """
     Server
     """
+    And the output should contain:
+    """
+    HTTP Status Code: 200
+    """
 
   Scenario: Output configured proxy without user name and password
     Given a spec file named "test_spec.rb" with:
@@ -175,4 +179,28 @@ Feature: Announce information
     And the output should contain:
     """
     Server
+    """
+
+  Scenario: Output HTTP status code
+    Given a spec file named "test_spec.rb" with:
+    """
+    require 'spec_helper'
+
+    RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy, announce_status_code: true do
+      subject { 'http://localhost:8080' }
+
+      context 'when working proxy chain' do
+        before { visit 'http://localhost:8000' }
+
+        it { expect(request).to be_successful }
+      end
+    end
+    """
+    And I run `http_proxy` in background
+    And I run `http_server` in background
+    When I run `rspec`
+    Then the specs should all pass
+    And the output should contain:
+    """
+    HTTP Status Code: 200
     """

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'proxy_rb/api'
+require 'proxy_rb/main'
 
 # Main Module
 module ProxyRb
@@ -33,24 +34,12 @@ RSpec.configure do |config|
   config.before :each do |example|
     next unless self.class.include? ProxyRb::Api
 
-    %i(
-      proxy
-      proxy_user
-      resource
-      resource_user
-      http_response_headers
-    ).each do |announcer|
+    ProxyRb::ANNOUNCERS.each do |announcer|
       proxy_rb.announcer.activate(announcer) if example.metadata["announce_#{announcer}".to_sym]
     end
 
     if example.metadata[:announce]
-      %i(
-        proxy
-        proxy_user
-        resource
-        resource_user
-        http_response_headers
-      ).each do |announcer|
+      ProxyRb::ANNOUNCERS.each do |announcer|
         proxy_rb.announcer.activate(announcer)
       end
     end
