@@ -31,7 +31,7 @@ namespace :test do
 
   desc 'Run cucumber'
   task :cucumber do
-    sh 'bundle exec cucumber -p all'
+    sh 'bundle exec cucumber'
   end
 end
 
