@@ -12,7 +12,7 @@ RSpec::Matchers.define :be_forbidden do
 
     msg << %(expected that response of "#{resource}" has status code 403, but has #{actual.status_code}.)
 
-    if proxy.empty?
+    if proxy.nil? || proxy.empty?
       msg << %(No proxy was used.)
     else
       msg << %(It was fetched via proxy "#{proxy.to_s}".)
@@ -26,7 +26,7 @@ RSpec::Matchers.define :be_forbidden do
 
     msg << %(expected that response of "#{resource}" does not have status code 403.)
 
-    if proxy.empty?
+    if proxy.nil? || proxy.empty?
       msg << %(No proxy was used.)
     else
       msg << %(It was fetched via proxy "#{proxy.to_s}".)
