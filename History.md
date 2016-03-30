@@ -7,6 +7,7 @@ Empty
 ## [v0.10.5](https://github.com/fedux-org/proxy_rb/compare/v0.10.5...v0.10.5)
 
 * Fix for overwriting proxies
+* Better error messages for matchers
 
 ## [v0.10.4](https://github.com/fedux-org/proxy_rb/compare/v0.10.3...v0.10.4)
 
