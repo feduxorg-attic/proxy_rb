@@ -8,6 +8,10 @@
 
 `proxy_rb` makes it easier for you to test your proxy infrastructre.
 
+**Be careful:  This documentation is always up to date and might contain
+information that is not suitable for the version you are using. All features
+flagged with "experimental" might change without any further notice.**
+
 ## Installation
 
 Add this line to your application's Gemfile:

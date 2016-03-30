@@ -1,3 +1,4 @@
+@experimental
 Feature: Authenticate agains proxy
 
   Background:
