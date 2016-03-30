@@ -16,7 +16,7 @@ Given(/^I use the user "([^"]*)"(?: with password "([^"]*)")?$/) do |user_name, 
 end
 
 Given(/^I use the following proxies:$/) do |table|
-  @proxies = table.hashes.map do |r|
+  proxies.concat table.hashes.map do |r|
     p = ProxyRb::HttpProxy.new(ProxyRb::ProxyUrlParser.new(r[:proxy]))
 
     # Hide password by using <PASSWORD> => retrieve it using fetcher
