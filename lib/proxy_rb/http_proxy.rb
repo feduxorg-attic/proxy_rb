@@ -48,7 +48,12 @@ module ProxyRb
     # @return [ProxyUrl]
     #   The proxy as url
     def full_url
-      ProxyUrl.build url.to_hash.merge(credentials.to_hash)
+      ProxyUrl.build(
+        url.to_hash.merge(
+          user: credentials.user_name,
+          password: credentials.password
+        )
+      )
     end
 
     # Convert proxy to string
