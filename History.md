@@ -1,10 +1,8 @@
-#  UNRELEASED
+## [v0.10.6](https://github.com/fedux-org/proxy_rb/compare/v0.10.5...v0.10.6)
 
-Empty
+* Fix error message in matchers: The user name was missing
 
-# RELEASED
-
-## [v0.10.5](https://github.com/fedux-org/proxy_rb/compare/v0.10.5...v0.10.5)
+## [v0.10.5](https://github.com/fedux-org/proxy_rb/compare/v0.10.4...v0.10.5)
 
 * Fix for overwriting proxies
 * Better error messages for matchers
