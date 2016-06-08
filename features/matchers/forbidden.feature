@@ -123,6 +123,36 @@ Feature: Check if request is forbidden
     expected that response of "http://localhost:8000" does not have status code 403. It was fetched via proxy "http://localhost:8080".
     """
 
+  Scenario: If it should not match but fails it outputs a meaningful error message even if a proxy is used which requires authentication
+    Given I use a proxy requiring authentication
+    And the following local users are authorized to use the proxy:
+      | user  | password |
+      | user1 | *Test123 |
+    And I use a web server with the following configuration:
+       | option      | value |
+       | status_code | 403   |
+    And I run `http_server` in background
+    And I run `http_proxy` in background
+    And a spec file named "test_spec.rb" with:
+    """
+    require 'spec_helper'
+
+    RSpec.describe 'HTTP Proxy Infrastructure', type: :http_proxy do
+      subject { 'http://user1:*Test123@localhost:8080' }
+
+      context 'With proxy' do
+        before { visit 'http://localhost:8000' }
+
+        it { expect(request).not_to be_forbidden }
+      end
+    end
+    """
+    When I run `rspec`
+    Then the specs should not pass with:
+    """
+    expected that response of "http://localhost:8000" does not have status code 403. It was fetched via proxy "http://user1:*Test123@localhost:8080".
+    """
+
   Scenario: When server/proxy returns nil or zero as HTTP status code (strict mode)
     Given I use a web server with the following configuration:
        | option      | value |
