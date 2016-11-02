@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 # Main Module
 module ProxyRb
-  VERSION = '0.10.6'
+  VERSION = '1.0.0'
 end
