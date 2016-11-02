@@ -193,5 +193,6 @@ commits and tags, and push the `.gem` file to
 
 * Authentication against a proxy using BASIC-scheme works fine for `Poltergeist` and `Webkit`-drivers. It fails for `Selenium` as you cannot pass username and password to the browser
 * Authentication agains a proxy using NEGOTIATE (Kerberos) and NTLM-scheme fails for `Poltergeist` and `Webkit`-drivers due to problems with Qt which is used by both projects
+* Currently only `selenium-webdriver` <= 2.x works with `proxy_rb`. Versions >= 2 fail with `Unable to find Mozilla geckodriver`.
 
 

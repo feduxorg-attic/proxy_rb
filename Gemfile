@@ -6,7 +6,7 @@ gemspec
 
 # Required
 gem 'poltergeist'
-gem 'selenium-webdriver'
+gem 'selenium-webdriver', '~>2.53'
 gem 'cucumber', require: false
 gem 'rspec', require: false
 
