@@ -30,11 +30,14 @@ module ProxyRb
     #
     # If one method ends with "=", e.g. ":option1=", then notify the event
     # queue, that the user changes the value of "option1"
+    #
+    # rubocop:disable Style/MethodMissing
     def method_missing(name, *args, &block)
       event_bus.notify Events::ChangedConfiguration.new(changed: { name: name.to_s.gsub(/=$/, ''), value: args.first }) if name.to_s.end_with? '='
 
       config.send(name, *args, &block)
     end
+    # rubocop:enable Style/MethodMissing
 
     # Pass on respond_to?-calls
     def respond_to_missing?(name, _include_private)

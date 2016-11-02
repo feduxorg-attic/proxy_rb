@@ -17,12 +17,14 @@ module ProxyRb
         @config = config.dup
       end
 
+      # rubocop:disable Style/MethodMissing
       def method_missing(name, *args)
-        raise ArgumentError, 'Options take no argument' if args.count > 0
+        raise ArgumentError, 'Options take no argument' if args.count.positive?
         raise UnknownOptionError, %(Option "#{name}" is unknown. Please use only earlier defined options) unless config.key? name
 
         config[name]
       end
+      # rubocop:enable Style/MethodMissing
     end
   end
 end

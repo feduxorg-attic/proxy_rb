@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - 'tmp/**/*'
+    - Gemfile
   DisplayCopNames: true
   TargetRubyVersion: 2.3
 

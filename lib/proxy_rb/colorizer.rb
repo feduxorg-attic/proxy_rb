@@ -77,10 +77,10 @@ module ProxyRb
     COLORED_REGEXP = /\e\[(?:[34][0-7]|[0-9])?m/
 
     def self.included(klass)
-      if klass == String
-        ATTRIBUTES.delete(:clear)
-        ATTRIBUTE_NAMES.delete(:clear)
-      end
+      return unless klass == String
+
+      ATTRIBUTES.delete(:clear)
+      ATTRIBUTE_NAMES.delete(:clear)
     end
 
     # Returns an uncolored version of the string, that is all
